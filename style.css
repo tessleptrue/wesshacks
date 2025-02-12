@@ -1,0 +1,173 @@
+/* 
+    COMP 333: Software Engineering
+    Sebastian Zimmeck (szimmeck@wesleyan.edu)
+*/
+
+/* 
+    It is a good idea to include all styles in a separate Style Sheet such as 
+    this one.
+
+    Start styling with the general elements of your page, e.g., body style, 
+    pargraph style, ... . Then, you can modify those styles for individual 
+    instances using class tags, id tags, ... .
+*/
+
+/* 
+    You can import a font from Google at https://fonts.google.com/
+*/
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap");
+
+/* 
+    The imported font should be applied to all body text.
+*/
+body {
+  font-family: "Noto Sans SC", sans-serif;
+}
+
+/* 
+    All text in paragraphs should be blue.
+*/
+p {
+  color: blue;
+}
+
+/* 
+    The background of all divs should be pink.
+ */
+/* div {
+  background-color: pink;
+} */
+
+/* 
+    There is one white-div in our html_sample.html, which should have white 
+    font. 
+    
+    You can refer in Style Sheets to ids using #.
+*/
+#white-div {
+  color: white;
+}
+
+/* 
+    You can refer in Style Sheets to classes using the dot .
+*/
+.padding-color-class {
+  /* 
+        Instead of color names you can also use hexdecimal values. The lower the
+        number, the darker.
+  */
+  background-color: #000000;
+  /* 
+        You can also give colors in RGB values (0 to 255). If you are expecting 
+        older browsers using your site, refrain from using RGB formatting.
+  */
+  color: rgb(100, 168, 200);
+}
+
+.background-image-class {
+  background-image: url(https://picsum.photos/seed/picsum/400/200);
+  background-repeat: no-repeat;
+  color: rgb(5, 110, 10);
+}
+
+.css-box-model-class {
+  /* 
+        Demonstrates the CSS Box Model
+  */
+  border-width: 2px;
+  /* 
+        In order to see the border, you will need a border style.
+  */
+  border-style: solid;
+  /* 
+        You can add a margin to all four borders. If there is only one value, 
+        all borders are affected You can specify in clockwise order: 
+        top, right, bottom, left.
+  */
+  margin: 10px 30px 15px 25px;
+  /* 
+        While margins are at the outside of the border, paddings are at the 
+        inside. You can specify a single value for all four margins, but you 
+        could also specify the padding individually the as for the margins.
+  */
+  padding: 50px;
+}
+
+/* 
+    Links can be styled with CSS as well. There are four states: 
+    link (original state), visited, hover, active (on click).
+    For example, on hover, change the link color to green. Also, hover can be 
+    applied to divs.
+*/
+a:hover {
+  color: rgb(101, 249, 101);
+}
+
+.navbar {
+  background-color: chocolate;
+}
+/* 
+    For your custom navbar, you can specify the unorderd list style.
+*/
+.navbar ul {
+  /* 
+        Remove bullet points.
+  */
+  list-style: none;
+  width: 500px;
+  margin: 0 auto;
+  /* 
+        No padding.
+  */
+  padding: 0;
+  /* 
+        For navbars use background color that stands out.
+  */
+  background-color: black;
+  text-align: center;
+}
+
+/*  
+    Style individual list items.
+*/
+.navbar li {
+  width: 150 px;
+  background-color: #000;
+  border: 1px solid red;
+  /* 
+        Show the navbar elements next to each other instead of on top of each 
+        other. 
+  */
+  padding: 10px;
+  display: inline-block;
+  line-height: 40px;
+}
+
+/* 
+    Style links in navbar.
+*/
+.navbar a {
+  color: #fff;
+  text-decoration: none;
+}
+
+table,
+td {
+  border: 1px solid gray;
+}
+
+input {
+  /* 
+        Show different input on top of each other instead of next to each other.
+  */
+  display: block;
+}
+
+/* 
+    Style iframes.
+*/
+iframe {
+  width: 100%;
+  height: 100%;
+  border: dotted;
+}
