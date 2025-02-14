@@ -6,6 +6,9 @@
 */
 
 
+img {
+  border: 5px solid #555;
+}
 
 body {
   font-family: "Noto Sans SC", sans-serif;
