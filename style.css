@@ -1,10 +1,6 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap");
 
-/* 
-    The imported font should be applied to all body text.
-*/
-
 
 img {
   border: 5px solid #555;
@@ -13,34 +9,43 @@ img {
 body {
   font-family: "Noto Sans SC", sans-serif;
   color: darkcyan;
+  background: floralwhite;
 }
 
 /* Add a class for our "About Us" boxes, so we can reuse the styles */
 .aboutus {
-  width: 50%;
+  width: 60%;
   border: 3px solid plum;
   text-align: center;
   margin: auto;
 }
 
-/* Add a black background color to the top navigation */
-.topnav {
+h1 {
+  text-align: center;
+}
+
+/* Add a plum background color to the top navigation */
+.flex-container {
+  display: flex;
   background-color: plum;
   overflow: hidden;
+  justify-content: center;
 }
 
 /* Style the links inside the navigation bar */
-.topnav a {
-  float: left;
-  color: black;
+
+.flex-container a {
+  float: left; 
+  color: black; 
   text-align: center;
-  padding: 14px 16px;
+  padding: 10px 10px;
+  border: 2px solid black;
+  margin: 5px;
   text-decoration: none;
   font-size: 17px;
 }
-
 /* Change the color of links on hover */
-.topnav a:hover {
+.flex-container a:hover {
   background-color: #ddd;
   color: black;
 }
