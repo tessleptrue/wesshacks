@@ -50,6 +50,29 @@ h1 {
   color: black;
 }
 
+#searchbar {
+  padding-top: 10px;
+  height: 30px;
+
+  
+}
+
+input::placeholder {
+  opacity: 75%;
+}
+
+#searchbar input {
+  margin: 0 auto;
+  display: block;
+  text-size-adjust: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+  width:95%;
+  font-size:30px;
+  
+}
+
 /* Add a color to the active/current link */
 /*
 .topnav a.active {
