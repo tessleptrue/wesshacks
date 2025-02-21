@@ -3,7 +3,7 @@
 
 @font-face {
   font-family: "Noto Sans SC";
-  src: url("noto-sans-sc-4-400-normal.woff2") format("woff2"),
+  src: url("fonts/noto-sans-sc-4-400-normal.woff2") format("woff2"),
        url("fonts/noto-sans-sc-4-400-normal.woff") format("woff");
   font-weight: normal;
   font-style: normal;
