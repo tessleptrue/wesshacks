@@ -1,5 +1,5 @@
 
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap"); */
 
 
 img {
@@ -7,7 +7,7 @@ img {
 }
 
 body {
-  font-family: "Noto Sans SC", sans-serif;
+  /* font-family: "Noto Sans SC", sans-serif; */
   color: rgb(0, 93, 93);
   background: floralwhite;
 }
