@@ -15,7 +15,7 @@
         in search results.
     -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="WesShacks is a housing review site for wood frame houses at Wesleyan University in Middletown, CT.">
+    <meta name="description" content="WesShacks is a housing review site for woodframe houses at Wesleyan University in Middletown, CT.">
 
     <!--
         The title is important for search engine optimization (SEO). It will be 
@@ -34,35 +34,43 @@
       <a href="reviews.html">Submit a Review</a>
       <a href=#login>Log in</a>
   </div>
+  <div>
     <p>
-      Welcome. WesShacks is a platform for users to browse, review, and rate the woodframe houses at Wesleyan University. Picking a house to live in can be difficult and having a reviews would provide to needed informating to make a decision. While personal preferences vary, knowing what previous residents thought about their home would be a tremendous help. 
+      Choosing where to live is an important decision, and although there is some information about the wood frame houses on Wesleyan's website, there isn't a streamlined way for students to hear from their peers about the pros and cons of living in different Wesleyan houses. That's why we created WesShacks, a platform for users to browse, rate, review, and ask and answer questions about wood frame houses at Wesleyan University. 
     </p>
+  </div>
 
     <div class="row">
-      <div class="column" style="background-color: rgb(0, 93, 93); color: floralwhite;">
+        <div class="column" style="background-color: rgb(128, 171, 240); color: rgb(0, 0, 0);">
         <h1 style = "text-align: center;">BROWSE</h1>
         <ul>
-          <li>Our goal is to make a directory of the woodframe houses at Wesleyan University.</li>
-          <li>We aim to provide detailed information about each house.</li>
-          <li>Users can explore various houses and their features.</li>
+          <li>Users can browse a directory of the woodframe houses at Wesleyan University.</li>
+          <li>Users can search for houses based on features such as number of bedrooms and street type.</li>
+          <li>Users can make informed decisions about where to live by reading the reviews and ratings written by their peers.</li>
         </ul>
       </div>
-      <div class="column" style="background-color: plum; color: black;">
+      <div class="column" style="background-color: rgb(0, 93, 93);; color: floralwhite;">
+        <h1 style = "text-align: center;">RATE</h1>
+        <ul>
+          <li>Users can rate different aspects of the houses on a scale from 1 to 5.</li>
+          <li>Aspects include the quality of the house's location, the quality of the bedrooms, and the quality of the common spaces.</li>
+          <li>Ratings contribute to the overall house ratings.</li>
+        </ul>
+      </div>
+      <div class="column" style="background-color: rgb(128, 171, 240); color: rgb(0, 0, 0);">
         <h1 style = "text-align: center;">REVIEW</h1>
         <ul>
           <li>After users create an account, they can write reviews about a house they currently live, a house they used to live in, or a house they have visited for an event.</li>
           <li>Reviews from users who live/lived in the house being reviewed will be tagged as resident reviews.</li>
           <li>Reviews from users who have visited the house being reviewed will be tagged as guest reviews.</li>
-          <li>Reviews help future residents make informed decisions about where they want to live.</li>
         </ul>
       </div>
-      <div class="column" style="background-color: rgb(128, 171, 240); color: rgb(0, 0, 0);">
-        <h1 style = "text-align: center;">RATE</h1>
+      <div class="column" style="background-color: rgb(0, 93, 93);; color: floralwhite;">
+        <h1 style = "text-align: center;">Q & A</h1>
         <ul>
-          <li>Users can rate different aspects of the houses on a scale from 1 to 5.</li>
-          <li>Ratings contribute to the overall house ratings.</li>
-          <li>Higher ratings can attract more interest from potential residents.</li>
-        </ul>
+          <li>Users who are trying to decide what house to live in can post questions about specific houses or specific streets.</li>
+          <li>Users who currently live in wooodframe houses can post answers to their questions.</li>
+          <li>Users can upvote answers they agree with and downvote answers they disagree with.</li>
       </div>
     </div>
     <h1 style = "text-align: center;">Our Partners</h1>
@@ -74,11 +82,16 @@
         <li>
           <a href="https://www.wesleyan.edu/mathcs/" target="_blank">Wesleyan Department of Mathematics and Computer Science</a>
         </li>
+        <li>
+          <a href="https://www.extraspace.com/" target="_blank">Extra Space Storage</a>
+        </li>
         <li>And more partners coming soon . . .
         </li>
       </ul>
     </div>
-    <h1 style = "text-align: center;">Our Future Projects</h1>
+    <h1 style = "text-align: center;">Maps Feature</h1>
+    <p>We plan to implement a maps feature, where each house has a corresponding iframe that shows its location on <a href="https://www.google.com/maps">Google Maps</a>.</p>
+    <p>Here's a sneak peak at the feature:</p>
     <div id="map-container">
       <!-- Show placeholder initially -->
       <div id="map-placeholder">
@@ -98,21 +111,6 @@
       document.getElementById('map-frame').style.display = 'block';
     }
     </script>
-
-    <p> WesShacks will provide to following services:</p>
-    <ol> 
-      <li>Reviews and comments on each house</li>
-      <li>Current residents may post their review</li>
-      <li>There will be a questions section so that the current residents may answer any questions about their living space</li>
-     </ol>
-    
-    
-  <div> 
-      <a href="https://www.wesleyan.edu/reslife/ugrad_housing/index.html"> undergrad housing 
-      </a>
-      <a href="https://www.wesleyan.edu/reslife/ugrad_housing/housing_Selection_info.html"> housing selection 
-      </a>
-  </div>
   <div class="footer">
     <p>This site was designed and published as part of the COMP 333 Software Engineering class at Wesleyan University. This is an exercise.</p>
   </div>

@@ -30,24 +30,39 @@ h1 {
   background-color: plum;
   overflow: hidden;
   justify-content: center;
+  flex-wrap: wrap; /* Allow items to wrap to the next line on smaller screens */
+  padding: 0 10px;  /* Add padding to prevent content from touching the edges */
 }
 
 /* Style the links inside the navigation bar */
-
 .flex-container a {
-  float: left; 
-  color: black; 
+  color: black;
   text-align: center;
-  padding: 10px 10px;
+  padding: 10px 15px; /* Adjust padding for better spacing */
   border: 2px solid black;
   margin: 5px;
   text-decoration: none;
   font-size: 17px;
+  white-space: nowrap; /* Prevent links from wrapping */
 }
+
 /* Change the color of links on hover */
 .flex-container a:hover {
   background-color: #ddd;
   color: black;
+}
+
+/* Media Query for smaller screens (like mobile devices) */
+@media (max-width: 768px) {
+  .flex-container {
+    justify-content: space-between; /* Distribute items with space between */
+    padding: 0 5px;  /* Adjust padding on small screens */
+  }
+
+  .flex-container a {
+    padding: 8px 10px;  /* Reduce padding for smaller screens */
+    font-size: 14px;    /* Reduce font size for smaller screens */
+  }
 }
 
 #searchbar {
@@ -71,31 +86,29 @@ input::placeholder {
   
 }
 
-/* Create three equal columns that floats next to each other */
+/* Flexbox */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .column {
-  float: left;
-  width: 33.33%;
+  flex: 1 1 25%;  /* Each column takes 25% of the available space, with flexibility */
   padding: 10px;
-  height: 350px; /* Should be removed. Only for demonstration */
+  /* height: 370px;  /* Optional for demonstration */ 
   box-sizing: border-box;
 }
 
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+/* Responsive layout */
 @media screen and (max-width: 600px) {
   .column {
-    width: 100%;
+    flex: 1 1 100%;  /* Stacks columns on top of each other */
   }
 }
 
+
 .footer {
-  position: fixed;
+  /* position: fixed; */
   left: 0;
   bottom: 0;
   width: 100%;
