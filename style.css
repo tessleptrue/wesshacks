@@ -33,7 +33,7 @@ h1 {
 }
 
 /* Add a plum background color to the top navigation */
-.flex-container {
+#flex-container {
   display: flex;
   background-color: plum;
   overflow: hidden;
@@ -43,7 +43,7 @@ h1 {
 }
 
 /* Style the links inside the navigation bar */
-.flex-container a {
+#flex-container a {
   color: black;
   text-align: center;
   padding: 10px 15px; /* Adjust padding for better spacing */
@@ -55,7 +55,7 @@ h1 {
 }
 
 /* Change the color of links on hover */
-.flex-container a:hover {
+#flex-container a:hover {
   background-color: #ddd;
   color: black;
 }
