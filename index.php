@@ -34,6 +34,29 @@
       <a href="reviews.html">Submit a Review</a>
       <a href=#login>Log in</a>
   </div>
+
+  <?php include "includes/header.php"; ?>
+
+  <div class="welcome-container">
+    <h1>Welcome to Our Website</h1>
+    <p>This is a secure website with user authentication using PHP and MySQL.</p>
+    
+    <?php if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true): ?>
+        <div class="user-welcome">
+            <p>You are logged in as <strong><?php echo htmlspecialchars($_SESSION["username"]); ?></strong>.</p>
+            <a href="dashboard.php" class="btn">Go to Dashboard</a>
+        </div>
+    <?php else: ?>
+        <div class="auth-options">
+            <p>Please login or register to access your account.</p>
+            <div class="btn-group">
+                <a href="login.php" class="btn">Login</a>
+                <a href="register.php" class="btn btn-alt">Register</a>
+            </div>
+        </div>
+    <?php endif; ?>
+</div>
+
   <div>
     <p>
       Choosing where to live is an important decision, and although there is some information about the wood frame houses on Wesleyan's website, there isn't a streamlined way for students to hear from their peers about the pros and cons of living in different Wesleyan houses. That's why we created WesShacks, a platform for users to browse, rate, review, and ask and answer questions about wood frame houses at Wesleyan University. 
@@ -117,4 +140,4 @@
   </body>
 </html>
 
-
+<?php include "includes/footer.php"; ?>
