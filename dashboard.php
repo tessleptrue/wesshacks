@@ -33,6 +33,8 @@ mysqli_close($conn);
 ?>
 
 <?php include "includes/header.php"; ?>
+<link rel="stylesheet" href="style.css" />
+
 
 <div class="dashboard-container">
     <h2>Welcome to Your Dashboard, <?php echo htmlspecialchars($_SESSION["username"]); ?></h2>

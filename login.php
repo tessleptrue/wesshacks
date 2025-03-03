@@ -89,6 +89,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 ?>
  
 <?php include "includes/header.php"; ?>
+<link rel="stylesheet" href="style.css" />
 
 <div class="form-container">
     <h2>Login</h2>

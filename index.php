@@ -26,16 +26,8 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>WesShacks: Coming Soon . . .</h1>
-  <div id="flex-container">
-      <a class="active" href="index.html">Home</a>
-      <a href="explorehouses.html">Explore Wesleyan Houses</a>
-      <a href="about_us.html">Meet the Team</a>
-      <a href="reviews.html">Submit a Review</a>
-      <a href=#login>Log in</a>
-  </div>
-
-  <?php include "includes/header.php"; ?>
+    <?php include "includes/header.php"; ?>
+  
 
   <div class="welcome-container">
     <h1>Welcome to Our Website</h1>
