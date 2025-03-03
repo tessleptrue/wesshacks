@@ -1,9 +1,9 @@
 <?php
 // Database configuration
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'root');     // Replace with your MySQL username
-define('DB_PASSWORD', '');         // Replace with your MySQL password
-define('DB_NAME', 'app_db');
+define('DB_SERVER', 'sql204.infinityfree.com');
+define('DB_USERNAME', 'if0_38404601');     // Replace with your MySQL username
+define('DB_PASSWORD', 'hXyzs4OFFX7tTy');         // Replace with your MySQL password
+define('DB_NAME', 'if0_38404601_users');
 
 // Connect to MySQL database
 $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);

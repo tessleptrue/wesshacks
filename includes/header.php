@@ -10,12 +10,14 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PHP Login System</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <style>
         .user-info {
             text-align: right;
         }
     </style>
 </head>
+
 <body>
     <header>
         <div class="container">
