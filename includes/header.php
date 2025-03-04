@@ -38,6 +38,7 @@ session_start();
       <a href="explorehouses.php">Explore Wesleyan Houses</a>
       <a href="about_us.php">Meet the Team</a>
       <a href="reviews.php">Submit a Review</a>
+      <a href="house_reg.php">Register a House</a>
       <a href="login.php">Log in</a>
     </div>
     <main>
