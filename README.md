@@ -11,6 +11,10 @@ As for team breakdown, we all contributed equally to this project.
 
 SQL Queries
 
+Create database
+
+CREATE DATABASE app_db;
+
 Create login table
 
 CREATE TABLE users (
@@ -19,6 +23,8 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE
 );
+
+Create houses table
 
 CREATE TABLE houses (
     street_address VARCHAR(255) PRIMARY KEY,
@@ -41,6 +47,8 @@ CREATE TABLE houses (
     ) STORED,
     bathrooms ENUM('1', '1.5','2' ,'2.5') NOT NULL
 );
+
+Create reviews table
 
 CREATE TABLE house_reviews (
     review_id INT AUTO_INCREMENT PRIMARY KEY,
