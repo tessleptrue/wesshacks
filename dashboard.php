@@ -13,7 +13,7 @@ require_once "config.php";
 
 // Get user information
 $user_id = $_SESSION["id"];
-$sql = "SELECT username FROM users WHERE id = ?";
+$sql = "SELECT username FROM users WHERE user_id = ?";
 
 if($stmt = mysqli_prepare($conn, $sql)){
     mysqli_stmt_bind_param($stmt, "i", $user_id);
