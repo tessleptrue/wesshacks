@@ -24,4 +24,11 @@ AI Assistance Disclaimer
 Parts of this project were developed with assistance from Claude, an AI assistant by Anthropic. Claude was used to help with code generation and debugging. All AI-assisted contributions were reviewed and validated to ensure they meet the requirements of the assignment.
 
 
+Chase's phpMyadmin:
 <img width="1440" alt="phpMyAdminChase" src="https://github.com/user-attachments/assets/d39761cf-6501-4363-a024-acf204af7edd" />
+
+Ford's PHPmyAdmin Dashboard:
+<img width="1437" alt="Screenshot 2025-03-06 at 5 41 08 PM" src="https://github.com/user-attachments/assets/71685ce4-a5cd-4d9f-a05f-c861a1521dbe" />
+
+
+
