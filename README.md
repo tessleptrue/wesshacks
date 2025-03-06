@@ -7,6 +7,14 @@ The code provided in this repo is the front-end code for WesShacks, a website wh
 
 Our website has four main parts so far: our landing page, which discusses our mission and gives a background to the site, our explore page, where people can search for houses matching certain criteria, our about us page, and our review submission page, where people can submit a review of a house. AN IMPORTANT NOTE is that this project is only the front-end of WesShacks. In the explore and review pages, the forms do not actually get submitted. We will be adding that in a future release.
 
+Set up instructions for local XAMPP enviornment:
+1. Clone this reopo into XAMPP/htdocs
+2. Start up the Apache server and mySQL data base
+3. In a browser naviagate to phpMyadmin and go to import tab
+4. Upload and import the create_db.sql file (drop app_db database if it already exits on your machine)
+5. Then navigate to localhost/wesshacks 
+
+
 As for team breakdown, we all contributed equally to this project.
 
 
