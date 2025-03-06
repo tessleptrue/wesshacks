@@ -23,55 +23,7 @@ AI Assistance Disclaimer
 Parts of this project were developed with assistance from Claude, an AI assistant by Anthropic. Claude was used to help with code generation and debugging. All AI-assisted contributions were reviewed and validated to ensure they meet the requirements of the assignment.
 
 
-SQL Queries
+Ford's PHPmyAdmin Dashboard:
+<img width="1437" alt="Screenshot 2025-03-06 at 5 41 08 PM" src="https://github.com/user-attachments/assets/71685ce4-a5cd-4d9f-a05f-c861a1521dbe" />
 
-Create database
 
-CREATE DATABASE app_db;
-
-Create login table
-
-CREATE TABLE users (
-    user_id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    email VARCHAR(100) NOT NULL UNIQUE
-);
-
-Create houses table
-
-CREATE TABLE houses (
-    street_address VARCHAR(255) PRIMARY KEY,
-    url VARCHAR(255),
-    capacity ENUM('2', '3', '4', '5', '6') NOT NULL,
-    is_quiet BOOLEAN GENERATED ALWAYS AS (
-        CASE 
-            WHEN 
-                street_address LIKE '%Brainerd Ave%' OR
-                street_address LIKE '%Fairview Ave%' OR
-                street_address LIKE '%High St%' OR
-                street_address LIKE '%Home Ave%' OR
-                street_address LIKE '%Huber Ave%' OR
-                street_address LIKE '%Knowles Ave%' OR
-                street_address LIKE '%Lawn Ave%' OR
-                street_address LIKE '%Williams St%'
-            THEN TRUE
-            ELSE FALSE
-        END
-    ) STORED,
-    bathrooms ENUM('1', '1.5','2' ,'2.5') NOT NULL
-);
-
-Create reviews table
-
-CREATE TABLE house_reviews (
-    review_id INT AUTO_INCREMENT PRIMARY KEY,
-    house_address VARCHAR(255) NOT NULL,
-    rating DECIMAL(2,1) NOT NULL CHECK (rating >= 0 AND rating <= 5 AND rating*10 = FLOOR(rating*10)),
-    review_text VARCHAR(500),
-    username VARCHAR(50) NOT NULL,
-    is_resident BOOLEAN NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (house_address) REFERENCES houses(street_address) ON DELETE CASCADE,
-    CONSTRAINT valid_rating CHECK (rating IN (0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5))
-);
