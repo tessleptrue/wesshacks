@@ -21,7 +21,7 @@ CREATE TABLE houses (
 CREATE TABLE house_reviews ( 
     review_id INT AUTO_INCREMENT PRIMARY KEY, 
     house_address VARCHAR(255) NOT NULL, 
-    rating DECIMAL(2,1) NOT NULL CHECK (rating >= 0 AND rating <= 5 AND rating10 = FLOOR(rating10)), 
+    rating DECIMAL(2,1) NOT NULL CHECK (rating >= 0 AND rating <= 5 AND rating*10 = FLOOR(rating*10)), 
     review_text VARCHAR(500), 
     username VARCHAR(50) NOT NULL, 
     is_resident BOOLEAN NOT NULL, 
