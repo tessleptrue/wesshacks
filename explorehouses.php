@@ -45,6 +45,19 @@ function getAverageRating($conn, $house_address) {
     return $row['avg_rating'] ? round($row['avg_rating'] * 10) / 10 : 0; // Round to 1 decimal place
 }
 
+// Function to get reviews count for a house
+function getReviewsCount($conn, $house_address) {
+    $sql = "SELECT COUNT(*) as count FROM house_reviews WHERE house_address = ?";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "s", $house_address);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_assoc($result);
+    mysqli_stmt_close($stmt);
+    
+    return $row['count'];
+}
+
 // Function to get reviews for a house
 function getHouseReviews($conn, $house_address) {
     $sql = "SELECT * FROM house_reviews WHERE house_address = ? ORDER BY created_at DESC";
@@ -109,12 +122,27 @@ while ($row = mysqli_fetch_assoc($result)) {
     }
     
     $row['is_quiet'] = $is_quiet;
+    $row['reviews_count'] = getReviewsCount($conn, $row['street_address']);
     $row['avg_rating'] = getAverageRating($conn, $row['street_address']);
     $row['reviews'] = getHouseReviews($conn, $row['street_address']);
     $houses[] = $row;
 }
 
 mysqli_stmt_close($stmt);
+
+// Sort houses: houses with reviews at the top, houses without reviews at the bottom
+usort($houses, function($a, $b) {
+    // If one has reviews and the other doesn't, the one with reviews comes first
+    if ($a['reviews_count'] > 0 && $b['reviews_count'] == 0) {
+        return -1;
+    }
+    if ($a['reviews_count'] == 0 && $b['reviews_count'] > 0) {
+        return 1;
+    }
+    
+    // If both have reviews or both don't have reviews, sort by address
+    return strcmp($a['street_address'], $b['street_address']);
+});
 ?>
 
 <!-- Main content starts here -->
@@ -245,6 +273,24 @@ mysqli_stmt_close($stmt);
         border-radius: 5px;
         color: #6c757d;
     }
+    
+    /* Section Separator */
+    .section-separator {
+        margin: 30px 0;
+        border-top: 1px solid #ddd;
+        position: relative;
+    }
+    
+    .separator-label {
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: white;
+        padding: 0 15px;
+        color: #6c757d;
+        font-weight: bold;
+    }
 </style>
 
 <div class="container">
@@ -295,7 +341,37 @@ mysqli_stmt_close($stmt);
             <p>Try adjusting your search filters or browse all houses.</p>
         </div>
     <?php else: ?>
-        <?php foreach ($houses as $house): ?>
+        <?php 
+        $houses_with_reviews = false;
+        $houses_without_reviews = false;
+        
+        // Check if we have both types of houses to display the separator
+        foreach ($houses as $house) {
+            if ($house['reviews_count'] > 0) {
+                $houses_with_reviews = true;
+            } else {
+                $houses_without_reviews = true;
+            }
+            
+            if ($houses_with_reviews && $houses_without_reviews) {
+                break;
+            }
+        }
+        
+        $displayed_separator = false;
+        ?>
+        
+        <?php foreach ($houses as $index => $house): ?>
+            <?php 
+            // Insert separator before the first house without reviews
+            if (!$displayed_separator && $houses_with_reviews && $houses_without_reviews && $house['reviews_count'] == 0): 
+                $displayed_separator = true;
+            ?>
+                <div class="section-separator">
+                    <span class="separator-label">Houses Without Reviews</span>
+                </div>
+            <?php endif; ?>
+            
             <div class="house-card">
                 <div class="house-header">
                     <h3><?php echo htmlspecialchars($house['street_address']); ?></h3>
