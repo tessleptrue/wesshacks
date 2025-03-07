@@ -14,6 +14,8 @@ Set up instructions for local XAMPP enviornment:
 4. Upload and import the create_db.sql file (drop app_db database if it already exits on your machine)
 5. Then navigate to localhost/wesshacks in a browser of your choice
 
+To access our site on the web, go to http://wesshacks.free.nf/
+
 As for team breakdown, we all contributed equally to this project for Homework #1 and Homework #2.
 
 AI Assistance Disclaimer:
