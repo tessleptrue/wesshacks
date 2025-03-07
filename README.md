@@ -3,7 +3,7 @@ COMP333 Wesleyan housing forum
 
 A website created by Olivia Bordon, Ford McDill, Chase Yahn-Krafft, and Tess Lepeska-True
 
-The code provided in this repo is the front-end and back-end code for WesShacks, a website where people can rate the woodframe houses on campus. Our website has five main parts so far: our landing page (Home), which discusses our mission and gives a background to the site, our explore page (Explore Wesleyan Houses), where people can search for houses matching certain criteria and read reviews written by their peers, our about us page (About Us), our review submission page (Submit a Review), where people can submit a review and rating of a house, and our Log in page (Log in) where users can log in (users must be logged in to submit a review/rating). 
+The code provided in this repo is the front-end and back-end code for WesShacks, a website where users, students at Wesleyan University, can rate the woodframe houses on campus. Our website has five main parts so far: our landing page (Home), which discusses our mission and gives a background to the site, our explore page (Explore Wesleyan Houses), where people can search for houses matching certain criteria and read reviews written by their peers, our about us page (About Us), our review submission page (Submit a Review), where people can submit a review and rating of a house, and our Log in page (Log in) where users can log in (users must be logged in to submit a review/rating). 
 
 AN IMPORTANT NOTE: This project is still being developed, so not all features are fully implemented.
 
