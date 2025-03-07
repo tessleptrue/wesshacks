@@ -30,5 +30,8 @@ Chase's phpMyadmin:
 Ford's PHPmyAdmin Dashboard:
 <img width="1437" alt="Screenshot 2025-03-06 at 5 41 08 PM" src="https://github.com/user-attachments/assets/71685ce4-a5cd-4d9f-a05f-c861a1521dbe" />
 
+Olivia's PHPmyAdmin Dashboard:
+<img width="1470" alt="Screenshot 2025-03-06 at 10 44 17 PM" src="https://github.com/user-attachments/assets/3fb3e9b8-9ab2-4cc8-a2a3-c9fdb42d8968" />
+
 
 
