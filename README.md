@@ -42,5 +42,8 @@ Parts of this project were developed with assistance from Claude, an AI assistan
 #### Olivia's phpMyAdmin Interface:
 <img width="1470" alt="Screenshot 2025-03-06 at 10 44 17 PM" src="https://github.com/user-attachments/assets/3fb3e9b8-9ab2-4cc8-a2a3-c9fdb42d8968" />
 
+#### Tess's phpMyAdmin Interface:
+<img width="1332" alt="Screenshot 2025-03-07 at 12 20 03 AM" src="https://github.com/user-attachments/assets/8ce6a0dc-9d80-4e54-8603-ab0095d33980" />
+
 
 
