@@ -21,7 +21,7 @@ As for team breakdown, we all contributed equally to this project.
 
 AI Assistance Disclaimer
 
-Parts of this project were developed with assistance from Claude, an AI assistant by Anthropic. Claude was used to help with code generation and debugging. All AI-assisted contributions were reviewed and validated to ensure they meet the requirements of the assignment.
+Parts of this project were developed with assistance from Claude, an AI assistant by Anthropic, and ChatGPT, an AI chatbot by OpenAI. Claude and ChatGPT were used to help with code generation and debugging. All AI-assisted contributions were reviewed and validated to ensure they meet the requirements of the assignment.
 
 
 Chase's phpMyadmin:
