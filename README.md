@@ -20,7 +20,7 @@ AI Assistance Disclaimer:
 
 Parts of this project were developed with assistance from Claude, an AI assistant by Anthropic, and ChatGPT, an AI chatbot by OpenAI. Claude and ChatGPT were used to help with code generation and debugging. All AI-assisted contributions were reviewed and validated to ensure they meet the requirements of the assignment.
 
-Screenshot of our table structures: 
+## Screenshot of our table structures: 
 
 Houses: 
 <img width="1230" alt="Screenshot 2025-03-06 at 10 57 43 PM" src="https://github.com/user-attachments/assets/79ece79f-1883-4573-bf16-d48931deeaf8" />
