@@ -20,6 +20,16 @@ AI Assistance Disclaimer:
 
 Parts of this project were developed with assistance from Claude, an AI assistant by Anthropic, and ChatGPT, an AI chatbot by OpenAI. Claude and ChatGPT were used to help with code generation and debugging. All AI-assisted contributions were reviewed and validated to ensure they meet the requirements of the assignment.
 
+Screenshot of our table structures: 
+
+Houses: 
+<img width="1230" alt="Screenshot 2025-03-06 at 10 57 43 PM" src="https://github.com/user-attachments/assets/79ece79f-1883-4573-bf16-d48931deeaf8" />
+
+Reviews/ratings:
+<img width="1230" alt="Screenshot 2025-03-06 at 10 58 23 PM" src="https://github.com/user-attachments/assets/9150c4f9-2c64-4e76-a38b-51be310fbca0" />
+
+Users: 
+<img width="1231" alt="Screenshot 2025-03-06 at 10 58 57 PM" src="https://github.com/user-attachments/assets/8377014e-2dfe-42b4-8a35-f965e5ac4643" />
 
 Chase's phpMyadmin:
 <img width="1440" alt="phpMyAdminChase" src="https://github.com/user-attachments/assets/d39761cf-6501-4363-a024-acf204af7edd" />
