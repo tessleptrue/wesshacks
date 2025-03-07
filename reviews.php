@@ -77,7 +77,7 @@ if($result = mysqli_query($conn, $houses_sql)){
 
 <!-- Main content starts here -->
 <?php include "includes/header.php"; ?>
-<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="style.css?v=1.0" /> <!-- this is a temporary fix to the issue of the css not being properly reloaded --> 
 
 <div class="container">
     <h1>Leave a House Review</h1>

@@ -10,6 +10,152 @@
 }
 */
 
+/* House listing styles */
+
+.filters {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.house-card {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.house-header {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.house-header h3 {
+  margin: 0;
+}
+
+.house-details {
+  padding: 15px;
+}
+
+.house-meta {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 10px;
+}
+
+.house-meta span {
+  display: flex;
+  align-items: center;
+}
+
+.house-meta span i {
+  margin-right: 5px;
+}
+
+.noise-badge {
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
+.quiet {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.loud {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.review-section {
+  padding: 15px;
+  border-top: 1px solid #eee;
+}
+
+.review-heading {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.1em;
+  color: #555;
+}
+
+.review-item {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.review-item:last-child {
+  border-bottom: none;
+}
+
+.review-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  font-size: 0.9em;
+  color: #666;
+}
+
+.resident-badge {
+  background-color: #cce5ff;
+  color: #004085;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-size: 0.8em;
+}
+
+.review-content {
+  margin-top: 5px;
+}
+
+.no-reviews {
+  color: #6c757d;
+  font-style: italic;
+}
+
+/* Rating Display Styles */
+.rating-display {
+  font-weight: bold;
+  color: #495057;
+}
+
+/* No results message */
+.no-results {
+  text-align: center;
+  padding: 30px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  color: #6c757d;
+}
+
+/* Section Separator */
+.section-separator {
+  margin: 30px 0;
+  border-top: 1px solid #ddd;
+  position: relative;
+}
+
+.separator-label {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  padding: 0 15px;
+  color: #6c757d;
+  font-weight: bold;
+}
+
+/* end house listing styles */
+
 img {
   border: 5px solid #555;
 }
@@ -148,3 +294,32 @@ input::placeholder {
   color: white;
   text-align: center;
 }
+
+/* Style for the Edit, Delete, and Write a Review button */
+.generic-btn {
+  display: inline-block;
+  padding: 6px 12px;  /* Adjust padding for size */
+  background-color: floralwhite;  /* Light green background */
+  color: rgb(0, 93, 93);  /* Dark green text color */
+  text-decoration: none;
+  border-radius: 25px;  /* Round corners */
+  font-weight: bold;
+  text-align: center;
+  border: 2px solid rgb(0, 93, 93);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .generic-btn:hover {
+  background-color: rgb(0, 93, 93);  /* Dark green on hover */
+  color: floralwhite;  /* White text on hover */
+  }
+
+  .generic-btn:active {
+  background-color: rgb(0, 93, 93);  /* Dark green on click */
+  color: floralwhite;  /* White text on click */
+  }
+
+  /* Add a little space between the date a review was published and the edit/delete buttons */
+  .review-date {
+  margin-bottom: 10px; /* Adjust this value to control the space */
+  }

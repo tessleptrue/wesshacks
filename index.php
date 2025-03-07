@@ -23,7 +23,7 @@
         should be unique.
     -->
     <title>WesShacks</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css?v=1.0" /> <!-- this is a temporary fix to the issue of the css not being properly reloaded --> 
   </head>
   <body>
     <?php include "includes/header.php"; ?>

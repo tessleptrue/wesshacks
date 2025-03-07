@@ -147,151 +147,11 @@ usort($houses, function($a, $b) {
 
 <!-- Main content starts here -->
 <?php include "includes/header.php"; ?>
-<link rel="stylesheet" href="style.css" />
-<style>
-    /* House listing styles */
-    .filters {
-        background-color: #f8f9fa;
-        padding: 15px;
-        border-radius: 5px;
-        margin-bottom: 20px;
-    }
-    
-    .house-card {
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        margin-bottom: 20px;
-        overflow: hidden;
-    }
-    
-    .house-header {
-        background-color: #f8f9fa;
-        padding: 15px;
-        border-bottom: 1px solid #ddd;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    
-    .house-header h3 {
-        margin: 0;
-    }
-    
-    .house-details {
-        padding: 15px;
-    }
-    
-    .house-meta {
-        display: flex;
-        gap: 20px;
-        margin-bottom: 10px;
-    }
-    
-    .house-meta span {
-        display: flex;
-        align-items: center;
-    }
-    
-    .house-meta span i {
-        margin-right: 5px;
-    }
-    
-    .noise-badge {
-        padding: 3px 8px;
-        border-radius: 12px;
-        font-size: 0.8em;
-        font-weight: bold;
-    }
-    
-    .quiet {
-        background-color: #d4edda;
-        color: #155724;
-    }
-    
-    .loud {
-        background-color: #f8d7da;
-        color: #721c24;
-    }
-    
-    .review-section {
-        padding: 15px;
-        border-top: 1px solid #eee;
-    }
-    
-    .review-heading {
-        margin-top: 0;
-        margin-bottom: 15px;
-        font-size: 1.1em;
-        color: #555;
-    }
-    
-    .review-item {
-        padding: 10px;
-        border-bottom: 1px solid #eee;
-    }
-    
-    .review-item:last-child {
-        border-bottom: none;
-    }
-    
-    .review-meta {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 5px;
-        font-size: 0.9em;
-        color: #666;
-    }
-    
-    .resident-badge {
-        background-color: #cce5ff;
-        color: #004085;
-        padding: 2px 5px;
-        border-radius: 3px;
-        font-size: 0.8em;
-    }
-    
-    .review-content {
-        margin-top: 5px;
-    }
-    
-    .no-reviews {
-        color: #6c757d;
-        font-style: italic;
-    }
-    
-    /* Rating Display Styles */
-    .rating-display {
-        font-weight: bold;
-        color: #495057;
-    }
-    
-    /* No results message */
-    .no-results {
-        text-align: center;
-        padding: 30px;
-        background-color: #f8f9fa;
-        border-radius: 5px;
-        color: #6c757d;
-    }
-    
-    /* Section Separator */
-    .section-separator {
-        margin: 30px 0;
-        border-top: 1px solid #ddd;
-        position: relative;
-    }
-    
-    .separator-label {
-        position: absolute;
-        top: -10px;
-        left: 50%;
-        transform: translateX(-50%);
-        background-color: white;
-        padding: 0 15px;
-        color: #6c757d;
-        font-weight: bold;
-    }
-</style>
+<head>
+<link rel="stylesheet" href="style.css?v=1.0" /> <!-- this is a temporary fix to the issue of the css not being properly reloaded --> 
+</head>
+
+<!-- This is where I removed styles from, moved them to style.css --> 
 
 <div class="container">
     <h1>WesShacks Houses</h1>
@@ -393,7 +253,7 @@ usort($houses, function($a, $b) {
                     </div>
                     
                     <div>
-                        <a href="reviews.php?house=<?php echo urlencode($house['street_address']); ?>" class="btn btn-sm btn-primary">Write a Review</a>
+                        <a href="reviews.php?house=<?php echo urlencode($house['street_address']); ?>" class="btn btn-sm generic-btn">Write a Review</a>
                     </div>
                 </div>
                 
@@ -422,9 +282,17 @@ usort($houses, function($a, $b) {
                                         <?php echo nl2br(htmlspecialchars($review['review_text'])); ?>
                                     </div>
                                 <?php endif; ?>
-                                <div class="text-muted small mt-1">
-                                    Posted on <?php echo date('F j, Y', strtotime($review['created_at'])); ?>
+                                <div class="text-muted small mt-1 review-date">
+                                    <i>Posted on <?php echo date('F j, Y', strtotime($review['created_at'])); ?></i>
                                 </div>
+                                <!-- This is where I originally edited --> 
+                                <?php if ($_SESSION['username'] === $review['username']): // Check if current user is the author ?>
+                                    <div class="review-actions">
+                                    <a href="edit_review.php?review_id=<?php echo $review['review_id']; ?>" class="btn generic-btn">Edit</a>
+                                    <a href="delete_review.php?review_id=<?php echo $review['review_id']; ?>" class="btn generic-btn" onclick="return confirm('Are you sure you want to delete this review?')">Delete</a>
+                                    </div>
+                                <?php endif; ?>
+                                <!-- end my edit --> 
                             </div>
                         <?php endforeach; ?>
                     <?php endif; ?>
