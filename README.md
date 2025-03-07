@@ -3,23 +3,20 @@ COMP333 Wesleyan housing forum
 
 A website created by Olivia Bordon, Ford McDill, Chase Yahn-Krafft, and Tess Lepeska-True
 
-The code provided in this repo is the front-end code for WesShacks, a website where people can rate their woodframe houses on campus and evaluate others as well. The code is relatively straightforward; we have 4 html files and 1 css file, all of which make up the framework of our site. The code can be run locally in a browser, but also can be acccessed at https://tessleptrue.github.io/wesshacks/index.html.
+The code provided in this repo is the front-end and back-end code for WesShacks, a website where people can rate the woodframe houses on campus. Our website has five main parts so far: our landing page (Home), which discusses our mission and gives a background to the site, our explore page (Explore Wesleyan Houses), where people can search for houses matching certain criteria and read reviews written by their peers, our about us page (About Us), our review submission page (Submit a Review), where people can submit a review and rating of a house, and our Log in page (Log in) where users can log in (users must be logged in to submit a review/rating). 
 
-Our website has four main parts so far: our landing page, which discusses our mission and gives a background to the site, our explore page, where people can search for houses matching certain criteria, our about us page, and our review submission page, where people can submit a review of a house. AN IMPORTANT NOTE is that this project is only the front-end of WesShacks. In the explore and review pages, the forms do not actually get submitted. We will be adding that in a future release.
+AN IMPORTANT NOTE: This project is still being developed, so not all features are fully implemented.
 
 Set up instructions for local XAMPP enviornment:
-1. Clone this reopo into XAMPP/htdocs
+1. Clone this repo into XAMPP/htdocs
 2. Start up the Apache server and mySQL data base
-3. In a browser naviagate to phpMyadmin and go to import tab
+3. In a browser naviagate to phpMyadmin and go to import tab.
 4. Upload and import the create_db.sql file (drop app_db database if it already exits on your machine)
-5. Then navigate to localhost/wesshacks 
+5. Then navigate to localhost/wesshacks in a browser of your choice
 
+As for team breakdown, we all contributed equally to this project for Homework #1 and Homework #2.
 
-
-As for team breakdown, we all contributed equally to this project.
-
-
-AI Assistance Disclaimer
+AI Assistance Disclaimer:
 
 Parts of this project were developed with assistance from Claude, an AI assistant by Anthropic, and ChatGPT, an AI chatbot by OpenAI. Claude and ChatGPT were used to help with code generation and debugging. All AI-assisted contributions were reviewed and validated to ensure they meet the requirements of the assignment.
 
