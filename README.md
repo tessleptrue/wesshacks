@@ -47,5 +47,10 @@ Parts of this project were developed with assistance from Claude, an AI assistan
 #### Tess's phpMyAdmin Interface:
 <img width="1332" alt="Screenshot 2025-03-07 at 12 20 03 AM" src="https://github.com/user-attachments/assets/8ce6a0dc-9d80-4e54-8603-ab0095d33980" />
 
+#### Ford's Postman Interface:
+
+<img width="1244" alt="Screenshot 2025-04-09 at 3 39 09 PM" src="https://github.com/user-attachments/assets/7cfded0a-94a2-40a0-8a2d-56fbd5621314" />
+<img width="1244" alt="Screenshot 2025-04-09 at 3 38 56 PM" src="https://github.com/user-attachments/assets/49ace30d-e6d3-4223-8989-8208beaee3ae" />
+
 
 
