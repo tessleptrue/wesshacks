@@ -52,5 +52,9 @@ Parts of this project were developed with assistance from Claude, an AI assistan
 <img width="1244" alt="Screenshot 2025-04-09 at 3 39 09 PM" src="https://github.com/user-attachments/assets/7cfded0a-94a2-40a0-8a2d-56fbd5621314" />
 <img width="1244" alt="Screenshot 2025-04-09 at 3 38 56 PM" src="https://github.com/user-attachments/assets/49ace30d-e6d3-4223-8989-8208beaee3ae" />
 
+### Tess's Postman Interface:
+<img width="1256" alt="Screenshot 2025-04-09 at 4 00 58 PM" src="https://github.com/user-attachments/assets/3b106f3b-bac1-49c3-a0c4-2a33afb09b8e" />
+<img width="1219" alt="Screenshot 2025-04-09 at 4 02 20 PM" src="https://github.com/user-attachments/assets/e4e33c4f-524d-47b9-9a93-320a6263acdf" />
+
 
 
