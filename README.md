@@ -23,7 +23,6 @@ Each team member contributed to HW03 equally.
 2. Start up the Apache server and mySQL data base
 3. In a browser naviagate to phpMyadmin and go to import tab.
 4. Upload and import the create_db.sql file (drop app_db database if it already exits on your machine)
-5. Then navigate to localhost/wesshacks in a browser of your choice
 
 ###### Instructions for viewing app using Android Studio (assuming user already has Android Studio set up)
 
