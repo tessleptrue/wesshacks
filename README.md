@@ -25,7 +25,8 @@ Parts of this project were developed with assistance from Claude, an AI assistan
 
 1. cd into mobile_app
 2. Run npm install in the terminal 
-3. Run npm run android in the terminal 
+3. Run npm run android in the terminal
+4. There is no need to edit any of the code to include your personal IP address
 
 
 #### Ford's Postman Interface:
@@ -37,7 +38,9 @@ Parts of this project were developed with assistance from Claude, an AI assistan
 <img width="1256" alt="Screenshot 2025-04-09 at 4 00 58 PM" src="https://github.com/user-attachments/assets/3b106f3b-bac1-49c3-a0c4-2a33afb09b8e" />
 <img width="1219" alt="Screenshot 2025-04-09 at 4 02 20 PM" src="https://github.com/user-attachments/assets/e4e33c4f-524d-47b9-9a93-320a6263acdf" />
 
+#### Olivia's Postman Interface:
 
+#### Chase's Postman Interface:
 
 ## Homework 2
 
