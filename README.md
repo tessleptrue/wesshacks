@@ -3,7 +3,9 @@ COMP333 Wesleyan housing forum
 
 A website created by Olivia Bordon, Ford McDill, Chase Yahn-Krafft, and Tess Lepeska-True
 
-AI Assistance Disclaimer:
+The code provided in this repo is the front-end and back-end code for WesShacks, a website and mobile app where users, students at Wesleyan University, can rate the woodframe houses on campus.
+
+###### AI Assistance Disclaimer:
 
 Parts of this project were developed with assistance from Claude, an AI assistant by Anthropic, and ChatGPT, an AI chatbot by OpenAI. Claude and ChatGPT were used to help with code generation and debugging. All AI-assisted contributions were reviewed and validated to ensure they meet the requirements of the assignment.
 
