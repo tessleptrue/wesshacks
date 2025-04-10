@@ -27,9 +27,14 @@ Each team member contributed to HW03 equally.
 ###### Instructions for viewing app using Android Studio (assuming user already has Android Studio set up)
 
 1. cd into mobile_app
-2. Run npm install in the terminal 
-3. Run npm run android in the terminal
-4. There is no need to edit any of the code to include your personal IP address
+2. In the termianl run the following commands: 
+  npm install
+  npm install @react-native-async-storage/async-storage@1.23.1
+  npm install @react-native-picker/picker@2.9.0
+  npm install react-native-safe-area-context@4.12.0
+  npm install react-native-screens@4.4.0
+  npm run android
+6. There is no need to edit any of the code to include your personal IP address
 
 
 #### Ford's Postman Interface:
