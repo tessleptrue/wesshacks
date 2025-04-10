@@ -11,6 +11,10 @@ Parts of this project were developed with assistance from Claude, an AI assistan
 
 ## Homework 3
 
+###### Team breakdown for HW03
+
+We all contributed to HW03 equally.
+
 ### Set up instruction for Homework #3
 
 ###### Set up instructions for local XAMPP enviornment:
