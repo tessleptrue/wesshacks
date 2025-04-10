@@ -6,6 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from './LoginScreen';
 import RegisterScreen from './RegisterScreen';
 import App from './App'; // Your existing app becomes the home screen
+import HouseDetailScreen from './HouseDetailScreen'; // Import the new screen
 
 // Import auth context
 import { useAuth } from './AuthContext';
@@ -36,7 +37,13 @@ const MainNavigator = () => (
         headerShown: false, // Hide header as your App already has its own header
       }}
     />
-    {/* Add more screens here as needed */}
+    <MainStack.Screen 
+      name="HouseDetail" 
+      component={HouseDetailScreen}
+      options={{
+        headerShown: true, 
+      }}
+    />
   </MainStack.Navigator>
 );
 

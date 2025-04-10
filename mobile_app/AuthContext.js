@@ -42,6 +42,9 @@ export const AuthProvider = ({ children }) => {
       // Update state
       setUser(userData);
       setToken(userToken);
+      
+      console.log('Login successful. Token:', userToken);
+      console.log('User data:', userData);
     } catch (e) {
       console.error('Failed to save auth data:', e);
       throw e;
@@ -94,7 +97,30 @@ export const AuthProvider = ({ children }) => {
 
   // Get auth header for API requests
   const getAuthHeader = () => {
-    return token ? { 'Authorization': `Bearer ${token}` } : {};
+    if (!token) {
+      console.log('No token available for auth header');
+      return {};
+    }
+    
+    console.log('Creating auth header with token:', token);
+    return { 'Authorization': `Bearer ${token}` };
+  };
+
+  // Validate the current auth token and refresh if needed
+  const validateAuth = async () => {
+    if (!token) return false;
+    
+    try {
+      const response = await fetch('http://10.0.2.2/wesshacks/api/users.php', {
+        headers: getAuthHeader()
+      });
+      
+      const data = await response.json();
+      return data.status === 'success';
+    } catch (e) {
+      console.error('Auth validation error:', e);
+      return false;
+    }
   };
 
   // Auth context value
@@ -107,6 +133,7 @@ export const AuthProvider = ({ children }) => {
     logout,
     register,
     getAuthHeader,
+    validateAuth,
   };
 
   // Provide the auth context to children

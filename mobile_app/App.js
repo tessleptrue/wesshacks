@@ -46,19 +46,29 @@ const App = ({ navigation }) => {
     }
   };
 
+  // Navigate to house details
+  const handleViewHouse = (house) => {
+    navigation.navigate('HouseDetail', { house });
+  };
+
   // Render each house item in the FlatList
   const renderHouse = ({ item }) => {
     return (
-      <View style={styles.houseContainer}>
-        <Text style={styles.houseTitle}>{item.street_address}</Text>
-        <Text style={styles.houseInfo}>Capacity: {item.capacity}</Text>
-        <Text style={styles.houseInfo}>Bathrooms: {item.bathrooms}</Text>
-        <Text style={styles.houseInfo}>Avg Rating: {item.avg_rating} ⭐</Text>
-        <Text style={styles.houseInfo}>Reviews: {item.reviews_count}</Text>
-        <Text style={styles.houseInfo}>
-          Quiet Street: {item.is_quiet == 1 ? 'Yes' : 'No'}
-        </Text>
-      </View>
+      <TouchableOpacity onPress={() => handleViewHouse(item)}>
+        <View style={styles.houseContainer}>
+          <Text style={styles.houseTitle}>{item.street_address}</Text>
+          <Text style={styles.houseInfo}>Capacity: {item.capacity}</Text>
+          <Text style={styles.houseInfo}>Bathrooms: {item.bathrooms}</Text>
+          <Text style={styles.houseInfo}>Avg Rating: {item.avg_rating} ⭐</Text>
+          <Text style={styles.houseInfo}>Reviews: {item.reviews_count}</Text>
+          <Text style={styles.houseInfo}>
+            Quiet Street: {item.is_quiet == 1 ? 'Yes' : 'No'}
+          </Text>
+          <View style={styles.viewDetailsContainer}>
+            <Text style={styles.viewDetailsText}>Tap to view details & reviews</Text>
+          </View>
+        </View>
+      </TouchableOpacity>
     );
   };
 
@@ -141,6 +151,14 @@ const styles = StyleSheet.create({
   houseInfo: {
     fontSize: 14,
     color: '#555',
+  },
+  viewDetailsContainer: {
+    marginTop: 10,
+    alignItems: 'flex-end',
+  },
+  viewDetailsText: {
+    color: '#0066cc',
+    fontSize: 14,
   },
   loaderContainer: {
     flex: 1,
