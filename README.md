@@ -28,12 +28,12 @@ Each team member contributed to HW03 equally.
 
 1. cd into mobile_app
 2. In the terminal run the following commands:
-  a. npm install
-  b. npm install @react-native-async-storage/async-storage@1.23.1
-  c. npm install @react-native-picker/picker@2.9.0
-  d. npm install react-native-safe-area-context@4.12.0
-  e. npm install react-native-screens@4.4.0
-  f. npm run android
+3. npm install
+4. npm install @react-native-async-storage/async-storage@1.23.1
+5. npm install @react-native-picker/picker@2.9.0
+6. npm install react-native-safe-area-context@4.12.0
+7. npm install react-native-screens@4.4.0
+8. npm run android
 9. There is no need to edit any of the code to include your personal IP address
 
 
