@@ -3,6 +3,10 @@ COMP333 Wesleyan housing forum
 
 A website created by Olivia Bordon, Ford McDill, Chase Yahn-Krafft, and Tess Lepeska-True
 
+AI Assistance Disclaimer:
+
+Parts of this project were developed with assistance from Claude, an AI assistant by Anthropic, and ChatGPT, an AI chatbot by OpenAI. Claude and ChatGPT were used to help with code generation and debugging. All AI-assisted contributions were reviewed and validated to ensure they meet the requirements of the assignment.
+
 ## Homework 3
 
 #### Ford's Postman Interface:
@@ -32,10 +36,6 @@ Set up instructions for local XAMPP enviornment:
 To access our site on the web, go to http://wesshacks.free.nf/
 
 As for team breakdown, we all contributed equally to this project for Homework #1 and Homework #2.
-
-AI Assistance Disclaimer:
-
-Parts of this project were developed with assistance from Claude, an AI assistant by Anthropic, and ChatGPT, an AI chatbot by OpenAI. Claude and ChatGPT were used to help with code generation and debugging. All AI-assisted contributions were reviewed and validated to ensure they meet the requirements of the assignment.
 
 ## Screenshot of our table structures: 
 
