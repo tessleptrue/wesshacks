@@ -22,6 +22,19 @@ const HouseDetailScreen = ({ route, navigation }) => {
   const [reviewText, setReviewText] = useState('');
   const [isResident, setIsResident] = useState(false);
   const { user, getAuthHeader } = useAuth();
+  
+  // For edit functionality
+  const [editingReviewId, setEditingReviewId] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+
+  // Reset form to create a new review
+  const resetForm = () => {
+    setRating(5);
+    setReviewText('');
+    setIsResident(false);
+    setEditingReviewId(null);
+    setIsEditing(false);
+  };
 
   // Fetch reviews for this house
   const fetchReviews = async () => {
@@ -39,7 +52,25 @@ const HouseDetailScreen = ({ route, navigation }) => {
     }
   };
 
-  // Handle submitting a new review
+  // Handle editing a review
+  const handleEditReview = (review) => {
+    // Populate the form with the review data
+    setRating(review.rating);
+    setReviewText(review.review_text);
+    setIsResident(review.is_resident === "1");
+    setEditingReviewId(review.review_id);
+    setIsEditing(true);
+    
+    // Scroll to the form
+    // This would require a ref to the form section, which we could add
+    // For now, we'll just notify the user
+    Alert.alert(
+      "Editing Review",
+      "You can now edit your review using the form above."
+    );
+  };
+
+  // Handle submitting a new review or updating an existing one
   const handleSubmitReview = async () => {
     if (!user) {
       Alert.alert('Error', 'You must be logged in to submit a review');
@@ -54,6 +85,16 @@ const HouseDetailScreen = ({ route, navigation }) => {
     setReviewLoading(true);
 
     try {
+      // Check if we're editing or creating a new review
+      if (isEditing && editingReviewId) {
+        // For editing, we'll use the DELETE + POST approach since the API doesn't support PUT/PATCH
+        // First, delete the existing review
+        await deleteReview(editingReviewId);
+        
+        // Then create a new one (which will happen below)
+        console.log('Deleted existing review. Creating new one.');
+      }
+      
       // This is a temporary workaround for the unauthorized issue
       // Instead of using the reviews.php endpoint directly, we'll use the users.php endpoint
       // to re-authenticate and then submit the review with a fresh token
@@ -122,10 +163,8 @@ const HouseDetailScreen = ({ route, navigation }) => {
           try {
             const backupJson = JSON.parse(backupText);
             if (backupJson.status === 'success') {
-              Alert.alert('Success', 'Your review has been submitted');
-              setRating(5);
-              setReviewText('');
-              setIsResident(false);
+              Alert.alert('Success', isEditing ? 'Your review has been updated' : 'Your review has been submitted');
+              resetForm();
               fetchReviews();
               setReviewLoading(false);
               return;
@@ -143,11 +182,9 @@ const HouseDetailScreen = ({ route, navigation }) => {
       }
 
       if (json.status === 'success') {
-        Alert.alert('Success', 'Your review has been submitted');
-        // Clear form fields
-        setRating(5);
-        setReviewText('');
-        setIsResident(false);
+        Alert.alert('Success', isEditing ? 'Your review has been updated' : 'Your review has been submitted');
+        // Clear form fields and reset editing state
+        resetForm();
         // Refresh reviews list
         fetchReviews();
       } else {
@@ -172,6 +209,35 @@ const HouseDetailScreen = ({ route, navigation }) => {
       Alert.alert('Error', 'Something went wrong. Please try again.');
     } finally {
       setReviewLoading(false);
+    }
+  };
+
+  // Helper function to delete a review (used for both direct deletion and as part of edit)
+  const deleteReview = async (reviewId) => {
+    try {
+      // Get auth header
+      const authHeader = getAuthHeader();
+      
+      // Send DELETE request to the API
+      const response = await fetch(`http://10.0.2.2/wesshacks/api/reviews.php?id=${reviewId}`, {
+        method: 'DELETE',
+        headers: authHeader
+      });
+      
+      const responseText = await response.text();
+      
+      // Parse the response
+      let json;
+      try {
+        json = JSON.parse(responseText);
+        return json.status === 'success';
+      } catch (e) {
+        console.error('Failed to parse JSON response from delete:', e);
+        return false;
+      }
+    } catch (error) {
+      console.error('Error in deleteReview helper:', error);
+      return false;
     }
   };
 
@@ -212,12 +278,21 @@ const HouseDetailScreen = ({ route, navigation }) => {
           )}
           
           {isAuthor && (
-            <TouchableOpacity 
-              style={styles.deleteButton}
-              onPress={() => handleDeleteReview(item.review_id)}
-            >
-              <Text style={styles.deleteButtonText}>Delete</Text>
-            </TouchableOpacity>
+            <View style={styles.actionButtons}>
+              <TouchableOpacity 
+                style={styles.editButton}
+                onPress={() => handleEditReview(item)}
+              >
+                <Text style={styles.editButtonText}>Edit</Text>
+              </TouchableOpacity>
+              
+              <TouchableOpacity 
+                style={styles.deleteButton}
+                onPress={() => handleDeleteReview(item.review_id)}
+              >
+                <Text style={styles.deleteButtonText}>Delete</Text>
+              </TouchableOpacity>
+            </View>
           )}
         </View>
       </View>
@@ -246,48 +321,17 @@ const HouseDetailScreen = ({ route, navigation }) => {
   // Confirm and process the review deletion
   const confirmDeleteReview = async (reviewId) => {
     try {
-      // Get auth header
-      const authHeader = getAuthHeader();
-      console.log('Auth header for deletion:', JSON.stringify(authHeader));
+      const success = await deleteReview(reviewId);
       
-      // Send DELETE request to the API
-      const response = await fetch(`http://10.0.2.2/wesshacks/api/reviews.php?id=${reviewId}`, {
-        method: 'DELETE',
-        headers: authHeader
-      });
-      
-      // Log response status
-      console.log('Delete response status:', response.status);
-      
-      const responseText = await response.text();
-      console.log('Delete response text:', responseText);
-      
-      // Parse the response
-      let json;
-      try {
-        json = JSON.parse(responseText);
-      } catch (e) {
-        console.error('Failed to parse JSON response:', e);
-        Alert.alert('Error', 'Received invalid response from server');
-        return;
-      }
-      
-      if (json.status === 'success') {
+      if (success) {
         Alert.alert('Success', 'Your review has been deleted');
         // Refresh the reviews list
         fetchReviews();
       } else {
-        if (json.message && json.message.toLowerCase().includes('unauthorized')) {
-          Alert.alert(
-            'Authentication Error',
-            'Your session may have expired. Please log out and log back in to delete this review.'
-          );
-        } else {
-          Alert.alert('Error', json.message || 'Failed to delete review');
-        }
+        Alert.alert('Error', 'Failed to delete review. Please try again.');
       }
     } catch (error) {
-      console.error('Error deleting review:', error);
+      console.error('Error in confirmDeleteReview:', error);
       Alert.alert('Error', 'Something went wrong. Please try again.');
     }
   };
@@ -320,7 +364,9 @@ const HouseDetailScreen = ({ route, navigation }) => {
       {/* Submit Review Section (only for logged in users) */}
       {user ? (
         <View style={styles.reviewFormContainer}>
-          <Text style={styles.sectionTitle}>Write a Review</Text>
+          <Text style={styles.sectionTitle}>
+            {isEditing ? 'Edit Your Review' : 'Write a Review'}
+          </Text>
           
           <Text style={styles.label}>Rating</Text>
           <View style={styles.pickerContainer}>
@@ -363,17 +409,31 @@ const HouseDetailScreen = ({ route, navigation }) => {
             <Text style={styles.checkboxLabel}>I am/was a resident of this house</Text>
           </View>
           
-          <TouchableOpacity 
-            style={styles.submitButton}
-            onPress={handleSubmitReview}
-            disabled={reviewLoading}
-          >
-            {reviewLoading ? (
-              <ActivityIndicator color="#fff" />
-            ) : (
-              <Text style={styles.submitButtonText}>Submit Review</Text>
+          <View style={styles.formButtons}>
+            <TouchableOpacity 
+              style={styles.submitButton}
+              onPress={handleSubmitReview}
+              disabled={reviewLoading}
+            >
+              {reviewLoading ? (
+                <ActivityIndicator color="#fff" />
+              ) : (
+                <Text style={styles.submitButtonText}>
+                  {isEditing ? 'Update Review' : 'Submit Review'}
+                </Text>
+              )}
+            </TouchableOpacity>
+            
+            {isEditing && (
+              <TouchableOpacity 
+                style={styles.cancelButton}
+                onPress={resetForm}
+                disabled={reviewLoading}
+              >
+                <Text style={styles.cancelButtonText}>Cancel</Text>
+              </TouchableOpacity>
             )}
-          </TouchableOpacity>
+          </View>
         </View>
       ) : (
         <View style={styles.loginPrompt}>
@@ -495,13 +555,32 @@ const styles = StyleSheet.create({
   checkboxLabel: {
     fontSize: 16,
   },
+  formButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   submitButton: {
     backgroundColor: '#0066cc',
     padding: 15,
     borderRadius: 5,
     alignItems: 'center',
+    flex: 1,
+    marginRight: 5,
   },
   submitButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  cancelButton: {
+    backgroundColor: '#aaa',
+    padding: 15,
+    borderRadius: 5,
+    alignItems: 'center',
+    flex: 1,
+    marginLeft: 5,
+  },
+  cancelButtonText: {
     color: '#fff',
     fontWeight: 'bold',
     fontSize: 16,
@@ -564,6 +643,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  actionButtons: {
+    flexDirection: 'row',
+  },
   residentBadge: {
     alignSelf: 'flex-start',
     backgroundColor: '#4CAF50',
@@ -571,6 +653,18 @@ const styles = StyleSheet.create({
     paddingVertical: 2,
     borderRadius: 12,
     color: 'white',
+    fontSize: 12,
+    fontWeight: 'bold',
+  },
+  editButton: {
+    backgroundColor: '#ffc107',
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderRadius: 4,
+    marginRight: 8,
+  },
+  editButtonText: {
+    color: '#333',
     fontSize: 12,
     fontWeight: 'bold',
   },
