@@ -3,6 +3,21 @@ COMP333 Wesleyan housing forum
 
 A website created by Olivia Bordon, Ford McDill, Chase Yahn-Krafft, and Tess Lepeska-True
 
+## Homework 3
+
+#### Ford's Postman Interface:
+
+<img width="1244" alt="Screenshot 2025-04-09 at 3 39 09 PM" src="https://github.com/user-attachments/assets/7cfded0a-94a2-40a0-8a2d-56fbd5621314" />
+<img width="1244" alt="Screenshot 2025-04-09 at 3 38 56 PM" src="https://github.com/user-attachments/assets/49ace30d-e6d3-4223-8989-8208beaee3ae" />
+
+#### Tess's Postman Interface:
+<img width="1256" alt="Screenshot 2025-04-09 at 4 00 58 PM" src="https://github.com/user-attachments/assets/3b106f3b-bac1-49c3-a0c4-2a33afb09b8e" />
+<img width="1219" alt="Screenshot 2025-04-09 at 4 02 20 PM" src="https://github.com/user-attachments/assets/e4e33c4f-524d-47b9-9a93-320a6263acdf" />
+
+
+
+## Homework 2
+
 The code provided in this repo is the front-end and back-end code for WesShacks, a website where users, students at Wesleyan University, can rate the woodframe houses on campus. Our website has five main parts so far: our landing page (Home), which discusses our mission and gives a background to the site, our explore page (Explore Wesleyan Houses), where people can search for houses matching certain criteria and read reviews written by their peers, our about us page (About Us), our review submission page (Submit a Review), where people can submit a review and rating of a house, and our Log in page (Log in) where users can log in (users must be logged in to submit a review/rating). 
 
 AN IMPORTANT NOTE: This project is still being developed, so not all features are fully implemented.
@@ -46,15 +61,5 @@ Parts of this project were developed with assistance from Claude, an AI assistan
 
 #### Tess's phpMyAdmin Interface:
 <img width="1332" alt="Screenshot 2025-03-07 at 12 20 03 AM" src="https://github.com/user-attachments/assets/8ce6a0dc-9d80-4e54-8603-ab0095d33980" />
-
-#### Ford's Postman Interface:
-
-<img width="1244" alt="Screenshot 2025-04-09 at 3 39 09 PM" src="https://github.com/user-attachments/assets/7cfded0a-94a2-40a0-8a2d-56fbd5621314" />
-<img width="1244" alt="Screenshot 2025-04-09 at 3 38 56 PM" src="https://github.com/user-attachments/assets/49ace30d-e6d3-4223-8989-8208beaee3ae" />
-
-### Tess's Postman Interface:
-<img width="1256" alt="Screenshot 2025-04-09 at 4 00 58 PM" src="https://github.com/user-attachments/assets/3b106f3b-bac1-49c3-a0c4-2a33afb09b8e" />
-<img width="1219" alt="Screenshot 2025-04-09 at 4 02 20 PM" src="https://github.com/user-attachments/assets/e4e33c4f-524d-47b9-9a93-320a6263acdf" />
-
 
 
