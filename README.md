@@ -11,6 +11,23 @@ Parts of this project were developed with assistance from Claude, an AI assistan
 
 ## Homework 3
 
+### Set up instruction for Homework #3
+
+Set up instructions for local XAMPP enviornment:
+
+Clone this repo into XAMPP/htdocs
+Start up the Apache server and mySQL data base
+In a browser naviagate to phpMyadmin and go to import tab.
+Upload and import the create_db.sql file (drop app_db database if it already exits on your machine)
+Then navigate to localhost/wesshacks in a browser of your choice
+
+Instructions for viewing app using Android Studio (assuming user already has Android Studio set up)
+
+cd into mobile_app
+Run npm install in the terminal 
+Run npm run android in the terminal 
+
+
 #### Ford's Postman Interface:
 
 <img width="1244" alt="Screenshot 2025-04-09 at 3 39 09 PM" src="https://github.com/user-attachments/assets/7cfded0a-94a2-40a0-8a2d-56fbd5621314" />
