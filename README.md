@@ -49,6 +49,9 @@ Each team member contributed to HW03 equally.
 #### Olivia's Postman Interface:
 
 #### Chase's Postman Interface:
+<img width="1392" alt="Screenshot 2025-04-10 at 8 47 32 PM" src="https://github.com/user-attachments/assets/ac6fdd04-7b57-4d27-9dd5-90eb8471e923" />
+<img width="1392" alt="Screenshot 2025-04-10 at 8 48 13 PM" src="https://github.com/user-attachments/assets/5d3ff0b1-37f8-4d89-ad92-9e2798b50fe1" />
+
 
 ## Homework 2
 
