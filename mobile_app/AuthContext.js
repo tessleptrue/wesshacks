@@ -84,15 +84,11 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Register function
+  // Updated register function - doesn't automatically log in
   const register = async (userData, userToken) => {
-    try {
-      // Just log the user in after successful registration
-      await login(userData, userToken);
-    } catch (e) {
-      console.error('Failed to save registration data:', e);
-      throw e;
-    }
+    // Don't automatically log the user in
+    console.log('Registration successful');
+    return true; // Return success without logging in
   };
 
   // Get auth header for API requests

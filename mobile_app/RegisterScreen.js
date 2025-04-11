@@ -56,15 +56,10 @@ const RegisterScreen = ({ navigation }) => {
       const json = await response.json();
       
       if (json.status === 'success') {
-        // You can either automatically log them in:
-        const userData = {
-          id: json.user_id,
-          username: json.username
-        };
+        // Call the register function (which no longer logs in automatically)
+        await register();
         
-        await register(userData, json.token);
-        
-        // Or just show alert and navigate to login:
+        // Show success message and navigate to login
         Alert.alert(
           'Registration Successful',
           'You can now login with your new account',
