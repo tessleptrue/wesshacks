@@ -13,7 +13,7 @@ Parts of this project were developed with assistance from Claude, an AI assistan
 
 ##### Team breakdown for HW03
 
-Each team member contributed to HW03 equally.
+Each team member contributed to HW03 equally. We used two late dates on this assignment.
 
 ### Set up instruction for Homework #3
 
