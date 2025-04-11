@@ -26,15 +26,16 @@ Each team member contributed to HW03 equally. We used two late dates on this ass
 
 ###### Instructions for viewing app using Android Studio (assuming user already has Android Studio set up)
 
-1. cd into mobile_app
-2. In the terminal run the following commands:
-3. npm install
-4. npm install @react-native-async-storage/async-storage@1.23.1
-5. npm install @react-native-picker/picker@2.9.0
-6. npm install react-native-safe-area-context@4.12.0
-7. npm install react-native-screens@4.4.0
-8. npm run android
-9. There is no need to edit any of the code to include your personal IP address
+1. Open Android Studio -> Virtual Device Manager -> start device Pixel 6A, Android API 34
+2. cd into mobile_app
+3. In the terminal run the following commands:
+4. npm install
+5. npm install @react-native-async-storage/async-storage@1.23.1
+6. npm install @react-native-picker/picker@2.9.0
+7. npm install react-native-safe-area-context@4.12.0
+8. npm install react-native-screens@4.4.0
+9. npm run android
+10. There is no need to edit any of the code to include your personal IP address
 
 
 #### Ford's Postman Interface:
