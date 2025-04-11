@@ -47,6 +47,8 @@ Each team member contributed to HW03 equally. We used two late dates on this ass
 <img width="1219" alt="Screenshot 2025-04-09 at 4 02 20 PM" src="https://github.com/user-attachments/assets/e4e33c4f-524d-47b9-9a93-320a6263acdf" />
 
 #### Olivia's Postman Interface:
+<img width="1466" alt="Olivia Postman 1" src="https://github.com/user-attachments/assets/5e47078f-b700-4292-9d1f-87f05ee16268" />
+<img width="1468" alt="Olivia Postman 2" src="https://github.com/user-attachments/assets/ec4cdc45-c40e-4b99-9a7e-b45992662f1f" />
 
 #### Chase's Postman Interface:
 <img width="1392" alt="Screenshot 2025-04-10 at 8 47 32 PM" src="https://github.com/user-attachments/assets/ac6fdd04-7b57-4d27-9dd5-90eb8471e923" />
