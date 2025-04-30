@@ -136,6 +136,21 @@ class WesShacksAPI {
     async getUserInfo() {
         return this.request('/api/users.php');
     }
+
+    // Saved Houses endpoints
+    async getSavedHouses() {
+        return this.request('/api/saved_houses.php');
+    }
+
+    async saveHouse(houseAddress) {
+        return this.request('/api/saved_houses.php', 'POST', {
+            house_address: houseAddress
+        });
+    }
+
+    async unsaveHouse(houseAddress) {
+        return this.request(`/api/saved_houses.php?house=${encodeURIComponent(houseAddress)}`, 'DELETE');
+    }
 }
 
 // Create a global instance for easy access
