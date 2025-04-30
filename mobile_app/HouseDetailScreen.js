@@ -12,6 +12,8 @@ import {
 } from 'react-native';
 import { useAuth } from './AuthContext';
 import { Picker } from '@react-native-picker/picker';
+import { Ionicons } from 'react-native-vector-icons';
+import { useFocusEffect } from '@react-navigation/native';
 
 const HouseDetailScreen = ({ route, navigation }) => {
   const { house } = route.params;
@@ -21,6 +23,8 @@ const HouseDetailScreen = ({ route, navigation }) => {
   const [rating, setRating] = useState(5);
   const [reviewText, setReviewText] = useState('');
   const [isResident, setIsResident] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
+  const [saveLoading, setSaveLoading] = useState(false);
   const { user, getAuthHeader } = useAuth();
   
   // For edit functionality
@@ -36,6 +40,29 @@ const HouseDetailScreen = ({ route, navigation }) => {
     setIsEditing(false);
   };
 
+  // Check if house is saved
+  const checkIfSaved = async () => {
+    if (!user) return;
+    
+    try {
+      const response = await fetch('http://10.0.2.2/wesshacks/api/saved_houses.php', {
+        headers: getAuthHeader()
+      });
+      
+      const json = await response.json();
+      
+      if (json.status === 'success') {
+        // Check if current house is in saved houses list
+        const found = json.data.some(savedHouse => 
+          savedHouse.street_address === house.street_address
+        );
+        setIsSaved(found);
+      }
+    } catch (error) {
+      console.error('Error checking if house is saved:', error);
+    }
+  };
+
   // Fetch reviews for this house
   const fetchReviews = async () => {
     try {
@@ -49,6 +76,57 @@ const HouseDetailScreen = ({ route, navigation }) => {
       console.error('Error fetching reviews:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  // Handle saving/unsaving a house
+  const handleToggleSave = async () => {
+    if (!user) {
+      Alert.alert('Error', 'You must be logged in to save houses');
+      return;
+    }
+
+    setSaveLoading(true);
+    
+    try {
+      let response;
+      
+      if (isSaved) {
+        // Unsave the house
+        response = await fetch(`http://10.0.2.2/wesshacks/api/saved_houses.php?house=${encodeURIComponent(house.street_address)}`, {
+          method: 'DELETE',
+          headers: getAuthHeader()
+        });
+      } else {
+        // Save the house
+        response = await fetch('http://10.0.2.2/wesshacks/api/saved_houses.php', {
+          method: 'POST',
+          headers: {
+            ...getAuthHeader(),
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            house_address: house.street_address
+          })
+        });
+      }
+      
+      const json = await response.json();
+      
+      if (json.status === 'success') {
+        setIsSaved(!isSaved);
+        Alert.alert(
+          'Success', 
+          isSaved ? 'House removed from saved list' : 'House added to saved list'
+        );
+      } else {
+        Alert.alert('Error', json.message || 'Failed to update saved status');
+      }
+    } catch (error) {
+      console.error('Error toggling saved status:', error);
+      Alert.alert('Error', 'Something went wrong. Please try again.');
+    } finally {
+      setSaveLoading(false);
     }
   };
 
@@ -259,6 +337,19 @@ const HouseDetailScreen = ({ route, navigation }) => {
     });
   }, [navigation]);
 
+  // Fetch data when component mounts
+  useEffect(() => {
+    fetchReviews();
+    checkIfSaved();
+  }, [house.street_address]);
+
+  // Refresh data on focus (e.g., when returning from saved houses screen)
+  useFocusEffect(
+    React.useCallback(() => {
+      checkIfSaved();
+    }, [])
+  );
+
   // Render a single review
   const renderReview = ({ item }) => {
     // Check if the current user is the author of this review
@@ -336,15 +427,35 @@ const HouseDetailScreen = ({ route, navigation }) => {
     }
   };
 
-  useEffect(() => {
-    fetchReviews();
-  }, [house.street_address]);
-
   return (
     <ScrollView style={styles.container}>
       {/* House Details Section */}
       <View style={styles.houseContainer}>
-        <Text style={styles.houseTitle}>{house.street_address}</Text>
+        <View style={styles.houseTitleContainer}>
+          <Text style={styles.houseTitle}>{house.street_address}</Text>
+          {user && (
+            <TouchableOpacity 
+              style={styles.saveButton}
+              onPress={handleToggleSave}
+              disabled={saveLoading}
+            >
+              {saveLoading ? (
+                <ActivityIndicator size="small" color="#fff" />
+              ) : (
+                <>
+                  <Ionicons 
+                    name={isSaved ? 'bookmark' : 'bookmark-outline'} 
+                    size={20} 
+                    color="#fff" 
+                  />
+                  <Text style={styles.saveButtonText}>
+                    {isSaved ? 'Saved' : 'Save'}
+                  </Text>
+                </>
+              )}
+            </TouchableOpacity>
+          )}
+        </View>
         <Text style={styles.houseInfo}>Capacity: {house.capacity}</Text>
         <Text style={styles.houseInfo}>Bathrooms: {house.bathrooms}</Text>
         <Text style={styles.houseInfo}>Average Rating: {house.avg_rating} ⭐</Text>
@@ -474,10 +585,29 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#eee',
   },
+  houseTitleContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
   houseTitle: {
     fontSize: 22,
     fontWeight: 'bold',
-    marginBottom: 10,
+    flex: 1,
+  },
+  saveButton: {
+    backgroundColor: '#0066cc',
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  saveButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    marginLeft: 5,
   },
   houseInfo: {
     fontSize: 16,
