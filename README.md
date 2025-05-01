@@ -16,6 +16,7 @@ For our final project, we decided to implement a variety of small - medium featu
 In summary, here are the new features we implemented: 
 1. Search bar with filters
 2. Abiity to save houses
+3. Housing forum (coming soon)
 
 
 We are using two late days for the final project. 
