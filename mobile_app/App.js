@@ -9,7 +9,8 @@ import {
   TextInput,
   SafeAreaView,
   StatusBar,
-  Platform
+  Platform,
+  Alert
 } from 'react-native';
 import { useAuth } from './AuthContext';
 import { useFocusEffect } from '@react-navigation/native';
@@ -26,7 +27,7 @@ const App = ({ navigation, route }) => {
     bathroomFilter: 'all',
     isFiltered: false
   });
-  const { user, logout, getAuthHeader } = useAuth();
+  const { user, getAuthHeader } = useAuth();
 
   // Handle filter changes when returning from the filter screen
   useEffect(() => {
@@ -59,14 +60,21 @@ const App = ({ navigation, route }) => {
         queryParams.append('search', filters.searchText.trim());
       }
       
+      // Add bathroom filter
+      if (filters.bathroomFilter && filters.bathroomFilter !== 'all') {
+        queryParams.append('bathroom', filters.bathroomFilter);
+      }
+      
       // Create URL with query parameters
       const url = `http://10.0.2.2/wesshacks/api/houses.php${
         queryParams.toString() ? `?${queryParams.toString()}` : ''
       }`;
       
-      // Include auth headers in the request
-      const headers = {
+      // Include auth headers in the request if user is logged in
+      const headers = user ? {
         ...getAuthHeader(),
+        'Content-Type': 'application/json'
+      } : {
         'Content-Type': 'application/json'
       };
 
@@ -76,15 +84,8 @@ const App = ({ navigation, route }) => {
       
       const json = await response.json();
       if (json.status === 'success') {
-        let housesData = json.data;
-        
-        // Apply bathroom filter client-side (if API doesn't support it)
-        if (filters.bathroomFilter && filters.bathroomFilter !== 'all') {
-          housesData = housesData.filter(house => house.bathrooms === filters.bathroomFilter);
-        }
-        
-        setHouses(housesData);
-        setFilteredHouses(housesData);
+        setHouses(json.data);
+        setFilteredHouses(json.data);
       }
     } catch (error) {
       console.error('Error fetching houses data:', error);
@@ -122,16 +123,6 @@ const App = ({ navigation, route }) => {
     navigation.navigate('Filter', { currentFilters: activeFilters });
   };
 
-  // Handle logout
-  const handleLogout = async () => {
-    try {
-      await logout();
-      // Navigation is handled automatically by the Navigation component
-    } catch (error) {
-      console.error('Logout error:', error);
-    }
-  };
-
   // Navigate to house details
   const handleViewHouse = (house) => {
     navigation.navigate('HouseDetail', { house });
@@ -149,11 +140,118 @@ const App = ({ navigation, route }) => {
     setLocalSearchText('');
   };
 
+  // Handle saving a house
+  const handleSaveHouse = async (house) => {
+    if (!user) {
+      // If not logged in, prompt to go to profile tab to login
+      Alert.alert(
+        'Login Required',
+        'You need to be logged in to save houses. Please go to the Profile tab to login.',
+        [
+          {
+            text: 'Cancel',
+            style: 'cancel',
+          },
+          {
+            text: 'Go to Profile',
+            onPress: () => navigation.navigate('Profile'),
+          },
+        ]
+      );
+      return;
+    }
+
+    try {
+      const response = await fetch('http://10.0.2.2/wesshacks/api/saved_houses.php', {
+        method: 'POST',
+        headers: {
+          ...getAuthHeader(),
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          house_address: house.street_address
+        })
+      });
+      
+      const json = await response.json();
+      
+      if (json.status === 'success') {
+        // Update the local state to reflect the saved status
+        const updatedHouses = houses.map(h => {
+          if (h.street_address === house.street_address) {
+            return { ...h, is_saved: true };
+          }
+          return h;
+        });
+        
+        setHouses(updatedHouses);
+        
+        // Also update filtered houses
+        const updatedFiltered = filteredHouses.map(h => {
+          if (h.street_address === house.street_address) {
+            return { ...h, is_saved: true };
+          }
+          return h;
+        });
+        
+        setFilteredHouses(updatedFiltered);
+        
+        Alert.alert('Success', 'House saved to your profile');
+      } else {
+        Alert.alert('Error', json.message || 'Failed to save house');
+      }
+    } catch (error) {
+      console.error('Error saving house:', error);
+      Alert.alert('Error', 'Something went wrong. Please try again.');
+    }
+  };
+
+  // Handle unsaving a house
+  const handleUnsaveHouse = async (house) => {
+    try {
+      const response = await fetch(`http://10.0.2.2/wesshacks/api/saved_houses.php?house=${encodeURIComponent(house.street_address)}`, {
+        method: 'DELETE',
+        headers: getAuthHeader()
+      });
+      
+      const json = await response.json();
+      
+      if (json.status === 'success') {
+        // Update the local state to reflect the unsaved status
+        const updatedHouses = houses.map(h => {
+          if (h.street_address === house.street_address) {
+            return { ...h, is_saved: false };
+          }
+          return h;
+        });
+        
+        setHouses(updatedHouses);
+        
+        // Also update filtered houses
+        const updatedFiltered = filteredHouses.map(h => {
+          if (h.street_address === house.street_address) {
+            return { ...h, is_saved: false };
+          }
+          return h;
+        });
+        
+        setFilteredHouses(updatedFiltered);
+        
+        Alert.alert('Success', 'House removed from your saved list');
+      } else {
+        Alert.alert('Error', json.message || 'Failed to unsave house');
+      }
+    } catch (error) {
+      console.error('Error unsaving house:', error);
+      Alert.alert('Error', 'Something went wrong. Please try again.');
+    }
+  };
+
   // Render each house item in the FlatList
   const renderHouse = ({ item }) => {
     return (
-      <TouchableOpacity onPress={() => handleViewHouse(item)}>
-        <View style={styles.houseContainer}>
+      <View style={styles.houseContainer}>
+        <TouchableOpacity onPress={() => handleViewHouse(item)}>
           <Text style={styles.houseTitle}>{item.street_address}</Text>
           <Text style={styles.houseInfo}>Capacity: {item.capacity}</Text>
           <Text style={styles.houseInfo}>Bathrooms: {item.bathrooms}</Text>
@@ -162,11 +260,31 @@ const App = ({ navigation, route }) => {
           <Text style={styles.houseInfo}>
             Quiet Street: {item.is_quiet == 1 ? 'Yes' : 'No'}
           </Text>
-          <View style={styles.viewDetailsContainer}>
-            <Text style={styles.viewDetailsText}>Tap to view details & reviews</Text>
-          </View>
+        </TouchableOpacity>
+        
+        <View style={styles.actionButtonsContainer}>
+          <TouchableOpacity 
+            style={styles.viewDetailsButton}
+            onPress={() => handleViewHouse(item)}
+          >
+            <Text style={styles.viewDetailsText}>View Details</Text>
+          </TouchableOpacity>
+          
+          {user && (
+            <TouchableOpacity 
+              style={[
+                styles.saveButton,
+                item.is_saved ? styles.unsaveButton : styles.saveButton
+              ]}
+              onPress={() => item.is_saved ? handleUnsaveHouse(item) : handleSaveHouse(item)}
+            >
+              <Text style={styles.saveButtonText}>
+                {item.is_saved ? 'Unsave' : 'Save'}
+              </Text>
+            </TouchableOpacity>
+          )}
         </View>
-      </TouchableOpacity>
+      </View>
     );
   };
 
@@ -204,12 +322,6 @@ const App = ({ navigation, route }) => {
       <View style={styles.container}>
         <View style={styles.headerContainer}>
           <Text style={styles.header}>Houses on Campus</Text>
-          <View style={styles.userContainer}>
-            <Text style={styles.welcome}>Welcome, {user?.username || 'User'}</Text>
-            <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-              <Text style={styles.logoutText}>Logout</Text>
-            </TouchableOpacity>
-          </View>
         </View>
         
         {/* Search Bar */}
@@ -289,26 +401,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
-  userContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginTop: 10,
-  },
-  welcome: {
-    fontSize: 16,
-    color: '#333',
-  },
-  logoutButton: {
-    backgroundColor: '#ff6b6b',
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    borderRadius: 5,
-  },
-  logoutText: {
-    color: 'white',
-    fontWeight: 'bold',
-  },
   searchContainer: {
     flexDirection: 'row',
     marginBottom: 10,
@@ -370,17 +462,47 @@ const styles = StyleSheet.create({
   houseTitle: {
     fontSize: 18,
     fontWeight: 'bold',
+    marginBottom: 5,
   },
   houseInfo: {
     fontSize: 14,
     color: '#555',
+    marginBottom: 2,
   },
-  viewDetailsContainer: {
+  actionButtonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginTop: 10,
-    alignItems: 'flex-end',
+  },
+  viewDetailsButton: {
+    backgroundColor: '#0066cc',
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 5,
+    flex: 1,
+    marginRight: 5,
+    alignItems: 'center',
   },
   viewDetailsText: {
-    color: '#0066cc',
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 14,
+  },
+  saveButton: {
+    backgroundColor: '#4CAF50',
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 5,
+    flex: 1,
+    marginLeft: 5,
+    alignItems: 'center',
+  },
+  unsaveButton: {
+    backgroundColor: '#ff6b6b',
+  },
+  saveButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
     fontSize: 14,
   },
   loaderContainer: {

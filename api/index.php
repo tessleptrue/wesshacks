@@ -16,6 +16,7 @@ echo json_encode([
             'params' => [
                 'capacity' => 'Filter by house capacity (2-6)',
                 'noise' => 'Filter by noise level (quiet|loud)',
+                'bathroom' => 'Filter by bathroom count (1|1.5|2|2.5)',
                 'search' => 'Search term for street address',
                 'id' => 'Get a specific house by address'
             ]
@@ -41,6 +42,23 @@ echo json_encode([
                 ]
             ],
             'authentication' => 'Required for POST and DELETE'
+        ],
+        [
+            'path' => '/api/saved_houses.php',
+            'methods' => ['GET', 'POST', 'DELETE'],
+            'description' => 'Manage saved houses for the current user',
+            'params' => [
+                'GET' => [
+                    'Get all houses saved by the current user'
+                ],
+                'POST' => [
+                    'house_address' => 'House address to save (required)'
+                ],
+                'DELETE' => [
+                    'house' => 'House address to unsave (required)'
+                ]
+            ],
+            'authentication' => 'Required for all methods'
         ],
         [
             'path' => '/api/users.php',

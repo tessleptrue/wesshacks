@@ -46,6 +46,14 @@ CREATE TABLE house_reviews (
     CONSTRAINT valid_rating CHECK (rating IN (0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5))
 );
 
+CREATE TABLE saved_houses (
+    user_id INT,
+    house_address VARCHAR(255),
+    PRIMARY KEY (user_id, house_address),
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (house_address) REFERENCES houses(street_address) ON DELETE CASCADE
+);
+
 -- This just creates our database by adding all the houses to the houses tab. As of right now, this is all the 2 and 3 person 
 -- houses along with some others. 
 INSERT INTO houses (street_address, url, capacity, bathrooms)
