@@ -26,6 +26,10 @@ const HouseDetailScreen = ({ route, navigation }) => {
   // For edit functionality
   const [editingReviewId, setEditingReviewId] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
+  
+  // For save functionality
+  const [isSaved, setIsSaved] = useState(house.is_saved || false);
+  const [saveLoading, setSaveLoading] = useState(false);
 
   // Reset form to create a new review
   const resetForm = () => {
@@ -49,6 +53,77 @@ const HouseDetailScreen = ({ route, navigation }) => {
       console.error('Error fetching reviews:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  // Check if this house is saved by the current user
+  const checkIfSaved = async () => {
+    if (!user) return;
+    
+    try {
+      const response = await fetch(`http://10.0.2.2/wesshacks/api/houses.php?id=${encodeURIComponent(house.street_address)}`, {
+        headers: getAuthHeader()
+      });
+      
+      const json = await response.json();
+      if (json.status === 'success' && json.data.length > 0) {
+        setIsSaved(json.data[0].is_saved);
+      }
+    } catch (error) {
+      console.error('Error checking if house is saved:', error);
+    }
+  };
+
+  // Handle saving/unsaving a house
+  const handleSaveToggle = async () => {
+    if (!user) {
+      Alert.alert('Error', 'You must be logged in to save houses');
+      return;
+    }
+
+    setSaveLoading(true);
+
+    try {
+      if (isSaved) {
+        // Unsave the house
+        const response = await fetch(`http://10.0.2.2/wesshacks/api/saved_houses.php?house=${encodeURIComponent(house.street_address)}`, {
+          method: 'DELETE',
+          headers: getAuthHeader()
+        });
+        
+        const json = await response.json();
+        if (json.status === 'success') {
+          setIsSaved(false);
+          Alert.alert('Success', 'House removed from your saved list');
+        } else {
+          Alert.alert('Error', json.message || 'Failed to unsave house');
+        }
+      } else {
+        // Save the house
+        const response = await fetch('http://10.0.2.2/wesshacks/api/saved_houses.php', {
+          method: 'POST',
+          headers: {
+            ...getAuthHeader(),
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            house_address: house.street_address
+          })
+        });
+        
+        const json = await response.json();
+        if (json.status === 'success') {
+          setIsSaved(true);
+          Alert.alert('Success', 'House saved to your list');
+        } else {
+          Alert.alert('Error', json.message || 'Failed to save house');
+        }
+      }
+    } catch (error) {
+      console.error('Error toggling saved state:', error);
+      Alert.alert('Error', 'Something went wrong. Please try again.');
+    } finally {
+      setSaveLoading(false);
     }
   };
 
@@ -259,6 +334,14 @@ const HouseDetailScreen = ({ route, navigation }) => {
     });
   }, [navigation]);
 
+  // Fetch initial data
+  useEffect(() => {
+    fetchReviews();
+    if (user) {
+      checkIfSaved();
+    }
+  }, [house.street_address]);
+
   // Render a single review
   const renderReview = ({ item }) => {
     // Check if the current user is the author of this review
@@ -336,29 +419,53 @@ const HouseDetailScreen = ({ route, navigation }) => {
     }
   };
 
-  useEffect(() => {
-    fetchReviews();
-  }, [house.street_address]);
-
   return (
     <ScrollView style={styles.container}>
       {/* House Details Section */}
       <View style={styles.houseContainer}>
         <Text style={styles.houseTitle}>{house.street_address}</Text>
-        <Text style={styles.houseInfo}>Capacity: {house.capacity}</Text>
-        <Text style={styles.houseInfo}>Bathrooms: {house.bathrooms}</Text>
-        <Text style={styles.houseInfo}>Average Rating: {house.avg_rating} ⭐</Text>
-        <Text style={styles.houseInfo}>
-          Quiet Street: {house.is_quiet == 1 ? 'Yes' : 'No'}
-        </Text>
-        {house.url && (
-          <TouchableOpacity 
-            style={styles.linkButton}
-            onPress={() => Alert.alert('External Link', 'In a real app, this would open the URL: ' + house.url)}
-          >
-            <Text style={styles.linkButtonText}>View on University Housing Site</Text>
-          </TouchableOpacity>
-        )}
+        <View style={styles.houseDetailsRow}>
+          <View style={styles.houseDetailColumn}>
+            <Text style={styles.houseInfo}>Capacity: {house.capacity}</Text>
+            <Text style={styles.houseInfo}>Bathrooms: {house.bathrooms}</Text>
+          </View>
+          <View style={styles.houseDetailColumn}>
+            <Text style={styles.houseInfo}>Average Rating: {house.avg_rating} ⭐</Text>
+            <Text style={styles.houseInfo}>
+              Quiet Street: {house.is_quiet == 1 ? 'Yes' : 'No'}
+            </Text>
+          </View>
+        </View>
+        
+        <View style={styles.buttonRow}>
+          {house.url && (
+            <TouchableOpacity 
+              style={styles.linkButton}
+              onPress={() => Alert.alert('External Link', 'In a real app, this would open the URL: ' + house.url)}
+            >
+              <Text style={styles.linkButtonText}>University Housing Site</Text>
+            </TouchableOpacity>
+          )}
+          
+          {user && (
+            <TouchableOpacity 
+              style={[
+                styles.saveButton,
+                isSaved ? styles.unsaveButton : styles.saveButton
+              ]}
+              onPress={handleSaveToggle}
+              disabled={saveLoading}
+            >
+              {saveLoading ? (
+                <ActivityIndicator size="small" color="#fff" />
+              ) : (
+                <Text style={styles.saveButtonText}>
+                  {isSaved ? 'Unsave House' : 'Save House'}
+                </Text>
+              )}
+            </TouchableOpacity>
+          )}
+        </View>
       </View>
 
       {/* Submit Review Section (only for logged in users) */}
@@ -479,19 +586,48 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10,
   },
+  houseDetailsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 10,
+  },
+  houseDetailColumn: {
+    flex: 1,
+  },
   houseInfo: {
     fontSize: 16,
     marginBottom: 5,
     color: '#444',
   },
+  buttonRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 10,
+  },
   linkButton: {
     backgroundColor: '#0066cc',
     padding: 10,
     borderRadius: 5,
-    marginTop: 10,
+    flex: 1,
+    marginRight: 5,
     alignItems: 'center',
   },
   linkButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  saveButton: {
+    backgroundColor: '#4CAF50',
+    padding: 10,
+    borderRadius: 5,
+    flex: 1,
+    marginLeft: 5,
+    alignItems: 'center',
+  },
+  unsaveButton: {
+    backgroundColor: '#ff6b6b',
+  },
+  saveButtonText: {
     color: '#fff',
     fontWeight: 'bold',
   },
