@@ -32,10 +32,13 @@ Each team member contributed to HW03 equally. We used two late dates on this ass
 4. npm install
 5. npm install @react-native-async-storage/async-storage@1.23.1
 6. npm install @react-native-picker/picker@2.9.0
-7. npm install react-native-safe-area-context@4.12.0
-8. npm install react-native-screens@4.4.0
-9. npm run android
-10. There is no need to edit any of the code to include your personal IP address
+7. npm install @react-navigation/bottom-tabs
+8. npm install @react-navigation/native @react-navigation/stack
+9. npm install react-native-safe-area-context@4.12.0
+10. npm install @expo/vector-icons
+11. npm install react-native-screens@4.4.0
+12. npm run android
+13. There is no need to edit any of the code to include your personal IP address
 
 
 #### Ford's Postman Interface:
