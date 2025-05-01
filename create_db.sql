@@ -54,6 +54,15 @@ CREATE TABLE saved_houses (
     FOREIGN KEY (house_address) REFERENCES houses(street_address) ON DELETE CASCADE
 );
 
+CREATE TABLE forum_posts (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  contact_info VARCHAR(255) NOT NULL,
+  content TEXT NOT NULL,
+  username VARCHAR(50) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- This just creates our database by adding all the houses to the houses tab. As of right now, this is all the 2 and 3 person 
 -- houses along with some others. 
 INSERT INTO houses (street_address, url, capacity, bathrooms)

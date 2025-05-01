@@ -11,6 +11,7 @@ import App from './App'; // The existing app (renamed to HomeScreen in the tabs)
 import HouseDetailScreen from './HouseDetailScreen';
 import FilterScreen from './FilterScreen';
 import ProfileScreen from './ProfileScreen';
+import ForumScreen from './ForumScreen';
 
 // Import auth context
 import { useAuth } from './AuthContext';
@@ -106,6 +107,15 @@ const MainTabNavigator = () => (
           <MaterialCommunityIcons name="home" color={color} size={size} />
         ),
         headerShown: false,
+      }}
+    />
+    <MainTab.Screen 
+      name="Forum" 
+      component={ForumScreen} 
+      options={{
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons name="forum" color={color} size={size} />
+        ),
       }}
     />
     <MainTab.Screen 
