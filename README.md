@@ -9,6 +9,12 @@ The code provided in this repo is the front-end and back-end code for WesShacks,
 
 Parts of this project were developed with assistance from Claude, an AI assistant by Anthropic, and ChatGPT, an AI chatbot by OpenAI. Claude and ChatGPT were used to help with code generation and debugging. All AI-assisted contributions were reviewed and validated to ensure they meet the requirements of the assignment.
 
+## Final Project
+
+For our final project, we decided to implement a variety of small - medium features to enhance our app. We added a search bar with the ability to filter results so that users can find the houses that fit the criteria they are looking for more easily. We also added the ability for users to save the houses they are interested in living in. This new save feature is very important because the primary purpose of our app is to make it easily for Wesleyan students to find the house they want to live in and repeatedly being able to look at potential houses is essential to this process. 
+
+We are using two late days for the final project. 
+
 ## Homework 3
 
 ##### Team breakdown for HW03
