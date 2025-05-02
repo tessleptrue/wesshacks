@@ -23,6 +23,27 @@ Set up instructions: use the same set up instructions as for HW03
 
 We are using two late days for the final project. 
 
+### Problem 1 Setup
+
+For setting up the tests, you need to navigate into ./wesshacks/test-project. Then, run the command "./vendor/bin/phpunit PHPtests.php" This will run the PHP tests found in PHPtests.php, of which there are 4.
+
+One thing to note is that we do not have a get_userlist test and instead replaced that with a get_houseslist test. This is because our user list is private, and if it is accessed, it will raise an exception. However, the house list is public, and therefore is able to be accessed by anyone. Thus, we just replaced the get_UserList test with a get_HousesList test.
+
+### Problem 2
+
+We have actually used generative AI for a lot of this process and have created much of WesShacks by using Claude.ai and ChatGPT. This is included in the testing. For me personally, I mostly used AI to help with errors that kept arising in the testing process. I wrote a basic test, but then when I sent along the users.php file, it learned what parts were incorrect in my tests and gave me help fixing it. One example of this is the formatting of the user creation. I was not sure how to format the user information, but artificial intelligence gave me the structure of the data that I should add. In the code shown below, I used AI to add the "form_params" section. 
+
+$response = $this->client->request('POST', 'api/users.php/list', [
+        'form_params' => [
+            'action' => 'register',
+            'username' => 'test3',
+            'password' => 'TestPassword1',
+            'email' => 'test3@wesleyan.edu'
+        ]
+    ]);
+
+This saved me a lot of time looking through the file users.php because I am less knowledgeable about the structure of that code because it was written by another member of the group. I think that ChatGPT and other AI models are excellent at parsing large amounts of code. For example, it would have taken me a long time to realize that I had to add a parameter for the action the user wants to do. However, after I provided ChatGPT with the users.php file, it found that and told me to add it to the form_params data. AI is very helpful in web development, and this is just one example of how our group has used it.
+
 ## Homework 3
 
 ##### Team breakdown for HW03
@@ -114,5 +135,7 @@ As for team breakdown, we all contributed equally to this project for Homework #
 
 #### Tess's phpMyAdmin Interface:
 <img width="1332" alt="Screenshot 2025-03-07 at 12 20 03 AM" src="https://github.com/user-attachments/assets/8ce6a0dc-9d80-4e54-8603-ab0095d33980" />
+
+
 
 
