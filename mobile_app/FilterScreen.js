@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   Text,
@@ -15,21 +15,39 @@ const FilterScreen = ({ navigation, route }) => {
   // Get current filters from route params or set defaults
   const { currentFilters = {} } = route.params || {};
   
-  const [searchText, setSearchText] = useState(currentFilters.searchText || '');
-  const [quietFilter, setQuietFilter] = useState(currentFilters.quietFilter || 'all');
-  const [capacityFilter, setCapacityFilter] = useState(currentFilters.capacityFilter || 'all');
-  const [bathroomFilter, setBathroomFilter] = useState(currentFilters.bathroomFilter || 'all');
+  // Initialize state with current filters or defaults
+  // Added useEffect to ensure proper initialization
+  const [searchText, setSearchText] = useState('');
+  const [quietFilter, setQuietFilter] = useState('all');
+  const [capacityFilter, setCapacityFilter] = useState('all');
+  const [bathroomFilter, setBathroomFilter] = useState('all');
+
+  // Initialize filters from route params when component mounts
+  useEffect(() => {
+    console.log("Filter screen received currentFilters:", currentFilters);
+    setSearchText(currentFilters.searchText || '');
+    setQuietFilter(currentFilters.quietFilter || 'all');
+    setCapacityFilter(currentFilters.capacityFilter || 'all');
+    setBathroomFilter(currentFilters.bathroomFilter || 'all');
+  }, []);
 
   // Apply filters and return to main screen
   const applyFilters = () => {
+    const filters = {
+      searchText,
+      quietFilter,
+      capacityFilter,
+      bathroomFilter,
+      isFiltered: true // Making sure this is explicitly set to true
+    };
+    
+    // Add debug logging
+    console.log("Applying filters:", filters);
+    
+    // Navigate back with the updated filters
     navigation.navigate('Home', {
-      filters: {
-        searchText,
-        quietFilter,
-        capacityFilter,
-        bathroomFilter,
-        isFiltered: true
-      }
+      filters,
+      timestamp: new Date().getTime() // Add timestamp to ensure params are seen as "new"
     });
   };
 
@@ -39,6 +57,12 @@ const FilterScreen = ({ navigation, route }) => {
     setQuietFilter('all');
     setCapacityFilter('all');
     setBathroomFilter('all');
+  };
+
+  // Cancel and go back without applying filters
+  const cancelFilters = () => {
+    console.log("Canceling filter changes");
+    navigation.goBack();
   };
 
   return (
@@ -133,6 +157,14 @@ const FilterScreen = ({ navigation, route }) => {
             <Text style={styles.applyButtonText}>Apply Filters</Text>
           </TouchableOpacity>
         </View>
+        
+        {/* Added Cancel Button */}
+        <TouchableOpacity 
+          style={styles.cancelButton}
+          onPress={cancelFilters}
+        >
+          <Text style={styles.cancelButtonText}>Cancel</Text>
+        </TouchableOpacity>
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -209,6 +241,21 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     textAlign: 'center',
+  },
+  // Added Cancel Button Style
+  cancelButton: {
+    marginTop: 15,
+    backgroundColor: '#fff',
+    padding: 15,
+    borderRadius: 8,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#ccc',
+  },
+  cancelButtonText: {
+    color: '#666',
+    fontSize: 16,
+    fontWeight: '500',
   },
 });
 

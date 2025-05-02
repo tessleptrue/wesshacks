@@ -30,17 +30,20 @@ const App = ({ navigation, route }) => {
   const { user, getAuthHeader } = useAuth();
 
   // Handle filter changes when returning from the filter screen
+  // Changed dependency array to ensure all route param changes are detected
   useEffect(() => {
     if (route.params?.filters) {
+      console.log("Received filters:", route.params.filters);
       setActiveFilters(route.params.filters);
       setLocalSearchText(route.params.filters.searchText || '');
     }
-  }, [route.params?.filters]);
+  }, [route.params]); // Changed from [route.params?.filters] to [route.params]
 
   // Fetch houses data from your API with filter support
   const fetchHouses = async (filters = {}) => {
     try {
       setLoading(true);
+      console.log("Fetching houses with filters:", filters);
       
       // Build query parameters
       let queryParams = new URLSearchParams();
@@ -86,6 +89,7 @@ const App = ({ navigation, route }) => {
       if (json.status === 'success') {
         setHouses(json.data);
         setFilteredHouses(json.data);
+        console.log(`Fetched ${json.data.length} houses`);
       }
     } catch (error) {
       console.error('Error fetching houses data:', error);
@@ -102,8 +106,13 @@ const App = ({ navigation, route }) => {
   // Refresh data when screen is focused
   useFocusEffect(
     React.useCallback(() => {
+      console.log("Screen focused, refreshing with current filters:", activeFilters);
       fetchHouses(activeFilters);
-    }, [])
+      return () => {
+        // Cleanup function if needed
+        console.log("Screen unfocused");
+      };
+    }, [activeFilters]) // Added activeFilters as dependency
   );
 
   // Filter houses by local search text (quick search without API call)
@@ -130,14 +139,19 @@ const App = ({ navigation, route }) => {
 
   // Clear all filters
   const handleClearFilters = () => {
-    setActiveFilters({
+    console.log("Clearing all filters");
+    const clearedFilters = {
       searchText: '',
       quietFilter: 'all',
       capacityFilter: 'all',
       bathroomFilter: 'all',
       isFiltered: false
-    });
+    };
+    setActiveFilters(clearedFilters);
     setLocalSearchText('');
+    
+    // Reload houses with cleared filters
+    fetchHouses(clearedFilters);
   };
 
   // Handle saving a house
@@ -247,47 +261,6 @@ const App = ({ navigation, route }) => {
     }
   };
 
-  // Render each house item in the FlatList
-  const renderHouse = ({ item }) => {
-    return (
-      <View style={styles.houseContainer}>
-        <TouchableOpacity onPress={() => handleViewHouse(item)}>
-          <Text style={styles.houseTitle}>{item.street_address}</Text>
-          <Text style={styles.houseInfo}>Capacity: {item.capacity}</Text>
-          <Text style={styles.houseInfo}>Bathrooms: {item.bathrooms}</Text>
-          <Text style={styles.houseInfo}>Avg Rating: {item.avg_rating} ⭐</Text>
-          <Text style={styles.houseInfo}>Reviews: {item.reviews_count}</Text>
-          <Text style={styles.houseInfo}>
-            Quiet Street: {item.is_quiet == 1 ? 'Yes' : 'No'}
-          </Text>
-        </TouchableOpacity>
-        
-        <View style={styles.actionButtonsContainer}>
-          <TouchableOpacity 
-            style={styles.viewDetailsButton}
-            onPress={() => handleViewHouse(item)}
-          >
-            <Text style={styles.viewDetailsText}>View Details</Text>
-          </TouchableOpacity>
-          
-          {user && (
-            <TouchableOpacity 
-              style={[
-                styles.saveButton,
-                item.is_saved ? styles.unsaveButton : styles.saveButton
-              ]}
-              onPress={() => item.is_saved ? handleUnsaveHouse(item) : handleSaveHouse(item)}
-            >
-              <Text style={styles.saveButtonText}>
-                {item.is_saved ? 'Unsave' : 'Save'}
-              </Text>
-            </TouchableOpacity>
-          )}
-        </View>
-      </View>
-    );
-  };
-
   // Generate a label for active filters
   const getActiveFiltersLabel = () => {
     const filters = [];
@@ -302,6 +275,10 @@ const App = ({ navigation, route }) => {
     
     if (activeFilters.bathroomFilter !== 'all') {
       filters.push(`${activeFilters.bathroomFilter} Baths`);
+    }
+    
+    if (activeFilters.searchText) {
+      filters.push(`"${activeFilters.searchText}"`);
     }
     
     return filters.length > 0 ? `Filters: ${filters.join(', ')}` : '';
@@ -380,6 +357,47 @@ const App = ({ navigation, route }) => {
       </View>
     </SafeAreaView>
   );
+  
+  // Render each house item in the FlatList
+  function renderHouse({ item }) {
+    return (
+      <View style={styles.houseContainer}>
+        <TouchableOpacity onPress={() => handleViewHouse(item)}>
+          <Text style={styles.houseTitle}>{item.street_address}</Text>
+          <Text style={styles.houseInfo}>Capacity: {item.capacity}</Text>
+          <Text style={styles.houseInfo}>Bathrooms: {item.bathrooms}</Text>
+          <Text style={styles.houseInfo}>Avg Rating: {item.avg_rating} ⭐</Text>
+          <Text style={styles.houseInfo}>Reviews: {item.reviews_count}</Text>
+          <Text style={styles.houseInfo}>
+            Quiet Street: {item.is_quiet == 1 ? 'Yes' : 'No'}
+          </Text>
+        </TouchableOpacity>
+        
+        <View style={styles.actionButtonsContainer}>
+          <TouchableOpacity 
+            style={styles.viewDetailsButton}
+            onPress={() => handleViewHouse(item)}
+          >
+            <Text style={styles.viewDetailsText}>View Details</Text>
+          </TouchableOpacity>
+          
+          {user && (
+            <TouchableOpacity 
+              style={[
+                styles.saveButton,
+                item.is_saved ? styles.unsaveButton : styles.saveButton
+              ]}
+              onPress={() => item.is_saved ? handleUnsaveHouse(item) : handleSaveHouse(item)}
+            >
+              <Text style={styles.saveButtonText}>
+                {item.is_saved ? 'Unsave' : 'Save'}
+              </Text>
+            </TouchableOpacity>
+          )}
+        </View>
+      </View>
+    );
+  };
 };
 
 const styles = StyleSheet.create({

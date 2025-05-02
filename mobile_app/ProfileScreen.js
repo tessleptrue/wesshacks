@@ -240,7 +240,7 @@ const ProfileScreen = ({ navigation }) => {
             {savedHouses.length === 0 && (
               <TouchableOpacity 
                 style={styles.browseButton}
-                onPress={() => navigation.navigate('Home')}
+                onPress={() => navigation.navigate('Houses')}
               >
                 <Text style={styles.browseButtonText}>Browse Houses</Text>
               </TouchableOpacity>
