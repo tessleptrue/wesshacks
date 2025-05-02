@@ -16,7 +16,7 @@ For our final project, we decided to implement a variety of small - medium featu
 In summary, here are the new features we implemented: 
 1. Search bar with filters
 2. Ability to save houses
-3. Forum feature
+3. Housing group forum
 4. Navigation bar
 
 Set up instructions: use the same set up instructions as for HW03
