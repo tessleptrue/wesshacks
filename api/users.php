@@ -129,6 +129,7 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION["username"] = $username;
                 
                 // Return success with token
+                http_response_code(201);
                 echo json_encode([
                     'status' => 'success',
                     'message' => 'Login successful',
@@ -137,14 +138,14 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'username' => $username
                 ]);
             } else {
-                http_response_code(401);
+                http_response_code(201);
                 echo json_encode([
                     'status' => 'error',
                     'message' => 'Invalid username or password'
                 ]);
             }
         } else {
-            http_response_code(401);
+            http_response_code(201);
             echo json_encode([
                 'status' => 'error',
                 'message' => 'Invalid username or password'
