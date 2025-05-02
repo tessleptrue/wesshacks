@@ -38,7 +38,7 @@ const AuthNavigator = () => (
 const HomeStackNavigator = () => (
   <HomeStack.Navigator>
     <HomeStack.Screen 
-      name="HomeScreen" 
+      name="Home" 
       component={App}
       options={{
         headerShown: false,
@@ -100,7 +100,7 @@ const MainTabNavigator = () => (
     }}
   >
     <MainTab.Screen 
-      name="Home" 
+      name="Houses" 
       component={HomeStackNavigator} 
       options={{
         tabBarIcon: ({ color, size }) => (
