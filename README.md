@@ -11,11 +11,12 @@ Parts of this project were developed with assistance from Claude, an AI assistan
 
 ## Final Project
 
-For our final project, we decided to implement a variety of small - medium features to enhance our app. We added a search bar with the ability to filter results so that users can find the houses that fit the criteria they are looking for more easily. We also added the ability for users to save the houses they are interested in living in. This new save feature is very important because the primary purpose of our app is to make it easily for Wesleyan students to find the house they want to live in and repeatedly being able to look at potential houses is essential to this process. 
+For our final project, we decided to implement a variety of small - medium features to enhance our app. We added a search bar with the ability to filter results so that users can find the houses that fit the criteria they are looking for more easily. We also added the ability for users to save the houses they are interested in living in. This new save feature is very important because the primary purpose of our app is to make it easy for Wesleyan students to find the house they want to live in and repeatedly being able to look at potential houses is essential to this process. Additionally, we added a forum where users who are looking for housemates can post. 
 
 In summary, here are the new features we implemented: 
 1. Search bar with filters
 2. Ability to save houses
+3. Forum feature
 
 Set up instructions: use the same set up instructions as for HW03
 
